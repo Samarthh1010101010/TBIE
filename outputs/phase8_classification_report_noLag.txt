@@ -1,0 +1,28 @@
+PHASE 8 — CLASSIFICATION REPORT (NovDec Test)
+Walk-forward: Train=FebOct | Val=OctNov | Test=NovDec
+Features: 49 (40 raw + 6 velocity + 3 context)
+Weighting (selected on val):    balanced
+Decision rule (selected on val): threshold-calibrated
+
+Macro F1 (Val  default):    0.7989
+Macro F1 (Val  calibrated): 0.8060
+Macro F1 (Test default):    0.8133
+Macro F1 (Test calibrated): 0.8048
+REPORTED Macro F1 (Test):   0.8048  95% CI [0.8009, 0.8075]
+
+Baselines (test):
+  majority-class:                0.0589
+  persistence (next = current):  0.5651
+  lift over persistence:         +0.2397
+
+                       precision    recall  f1-score   support
+
+       Growth Builder       0.77      0.59      0.67    180343
+High-Tier Accelerator       0.92      0.86      0.89     79487
+      Program Skeptic       0.71      0.92      0.80     86337
+   Silent Accumulator       0.63      0.73      0.68    153725
+      Plateau Cruiser       0.97      1.00      0.99       108
+
+             accuracy                           0.73    500000
+            macro avg       0.80      0.82      0.80    500000
+         weighted avg       0.74      0.73      0.73    500000

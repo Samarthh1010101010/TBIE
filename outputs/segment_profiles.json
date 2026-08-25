@@ -1,0 +1,262 @@
+{
+  "S01": {
+    "segment_id": "S01",
+    "segment_name": "Growth Builder",
+    "description": "Members classified as 'Growth Builder' with avg spend $247.1/30d, 4.8 purchases/30d, recency 3 days.",
+    "size": {
+      "count": 198035,
+      "percentage": 39.61
+    },
+    "key_characteristics": {
+      "tier_changes_count": {
+        "mean": 0.9981,
+        "median": 1.0
+      },
+      "unique_channels_90d": {
+        "mean": 3.6533,
+        "median": 4.0
+      },
+      "spend_per_purchase_90d": {
+        "mean": 51.1297,
+        "median": 48.9744
+      },
+      "points_earned_lifetime": {
+        "mean": 16240.4021,
+        "median": 14892.0
+      },
+      "recency_days": {
+        "mean": 7.6199,
+        "median": 6.0
+      }
+    },
+    "cardholder_composition": {
+      "plcc_cardholder_pct": 34.92,
+      "non_cardholder_pct": 65.08
+    },
+    "recommended_activation": {
+      "Silent Accumulator": "Channel: app push | Message: unspent points reminder | Offer: limited-time redemption bonus | Timing: weekly | Tone: progression/momentum framing",
+      "Value Maximizer": "Channel: email | Message: cross-category points multiplier | Offer: category diversity bonus | Timing: mid-month | Tone: progression/momentum framing",
+      "Win-Back Target": "No members in Growth Builder x Win-Back Target combination",
+      "Redemption Hunter": "Channel: email+push | Message: targeted flash promotion | Offer: limited-time category reward | Timing: around promotional periods | Tone: progression/momentum framing",
+      "Program Skeptic": "Channel: email | Message: re-permission with value proof | Offer: one-time surprise reward | Timing: monthly | Tone: progression/momentum framing",
+      "New & Uncertain": "Channel: app onboarding | Message: welcome journey | Offer: first-purchase bonus | Timing: within 7 days of enrollment | Tone: progression/momentum framing",
+      "Lapse Risk": "Channel: email+SMS | Message: personalised win-back with bonus points | Offer: double points on next purchase | Timing: within 7 days | Tone: progression/momentum framing",
+      "Momentum Builder": "Channel: app push | Message: tier upgrade progress | Offer: tier accelerator bonus | Timing: immediate | Tone: progression/momentum framing",
+      "Plateau Cruiser": "Channel: email | Message: personalised recommendation | Offer: curated reward unlock | Timing: monthly | Tone: progression/momentum framing",
+      "Brand Advocate": "Channel: app | Message: early access to new reward | Offer: referral bonus | Timing: immediate | Tone: progression/momentum framing"
+    },
+    "common_states": [
+      "Momentum Builder",
+      "Program Skeptic",
+      "Brand Advocate"
+    ]
+  },
+  "S02": {
+    "segment_id": "S02",
+    "segment_name": "High-Tier Accelerator",
+    "description": "Members classified as 'High-Tier Accelerator' with avg spend $689.3/30d, 7.6 purchases/30d, recency 3 days.",
+    "size": {
+      "count": 87688,
+      "percentage": 17.54
+    },
+    "key_characteristics": {
+      "spend_total_180d": {
+        "mean": 3043.3681,
+        "median": 2937.7
+      },
+      "spend_total_90d": {
+        "mean": 1846.7744,
+        "median": 1779.75
+      },
+      "points_earned_lifetime": {
+        "mean": 50633.019,
+        "median": 48613.0
+      },
+      "spend_total_30d": {
+        "mean": 702.4854,
+        "median": 667.32
+      },
+      "purchase_count_180d": {
+        "mean": 34.126,
+        "median": 34.0
+      }
+    },
+    "cardholder_composition": {
+      "plcc_cardholder_pct": 61.36,
+      "non_cardholder_pct": 38.64
+    },
+    "recommended_activation": {
+      "Silent Accumulator": "Channel: app push | Message: unspent points reminder | Offer: limited-time redemption bonus | Timing: weekly | Tone: VIP/exclusive framing \u2014 no discounts",
+      "Value Maximizer": "Channel: email | Message: cross-category points multiplier | Offer: category diversity bonus | Timing: mid-month | Tone: VIP/exclusive framing \u2014 no discounts",
+      "Win-Back Target": "No members in High-Tier Accelerator x Win-Back Target combination",
+      "Redemption Hunter": "No members in High-Tier Accelerator x Redemption Hunter combination",
+      "Program Skeptic": "Channel: email | Message: re-permission with value proof | Offer: one-time surprise reward | Timing: monthly | Tone: VIP/exclusive framing \u2014 no discounts",
+      "New & Uncertain": "Channel: app onboarding | Message: welcome journey | Offer: first-purchase bonus | Timing: within 7 days of enrollment | Tone: VIP/exclusive framing \u2014 no discounts",
+      "Lapse Risk": "No members in High-Tier Accelerator x Lapse Risk combination",
+      "Momentum Builder": "Channel: app push | Message: tier upgrade progress | Offer: tier accelerator bonus | Timing: immediate | Tone: VIP/exclusive framing \u2014 no discounts",
+      "Plateau Cruiser": "Channel: email | Message: personalised recommendation | Offer: curated reward unlock | Timing: monthly | Tone: VIP/exclusive framing \u2014 no discounts",
+      "Brand Advocate": "Channel: app | Message: early access to new reward | Offer: referral bonus | Timing: immediate | Tone: VIP/exclusive framing \u2014 no discounts"
+    },
+    "common_states": [
+      "Brand Advocate",
+      "Momentum Builder",
+      "Program Skeptic"
+    ]
+  },
+  "S03": {
+    "segment_id": "S03",
+    "segment_name": "Program Skeptic",
+    "description": "Members classified as 'Program Skeptic' with avg spend $187.3/30d, 4.0 purchases/30d, recency 5 days.",
+    "size": {
+      "count": 87505,
+      "percentage": 17.5
+    },
+    "key_characteristics": {
+      "tier_changes_count": {
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "tier_ordinal": {
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "spend_per_purchase_90d": {
+        "mean": 46.6828,
+        "median": 45.3455
+      },
+      "points_earned_lifetime": {
+        "mean": 12679.8678,
+        "median": 12036.0
+      },
+      "spend_total_180d": {
+        "mean": 782.1687,
+        "median": 736.78
+      }
+    },
+    "cardholder_composition": {
+      "plcc_cardholder_pct": 25.75,
+      "non_cardholder_pct": 74.25
+    },
+    "recommended_activation": {
+      "Silent Accumulator": "Channel: app push | Message: unspent points reminder | Offer: limited-time redemption bonus | Timing: weekly | Tone: low-commitment offer \u2014 value proof first",
+      "Value Maximizer": "Channel: email | Message: cross-category points multiplier | Offer: category diversity bonus | Timing: mid-month | Tone: low-commitment offer \u2014 value proof first",
+      "Win-Back Target": "No members in Program Skeptic x Win-Back Target combination",
+      "Redemption Hunter": "Channel: email+push | Message: targeted flash promotion | Offer: limited-time category reward | Timing: around promotional periods | Tone: low-commitment offer \u2014 value proof first",
+      "Program Skeptic": "Channel: email | Message: re-permission with value proof | Offer: one-time surprise reward | Timing: monthly | Tone: low-commitment offer \u2014 value proof first",
+      "New & Uncertain": "Channel: app onboarding | Message: welcome journey | Offer: first-purchase bonus | Timing: within 7 days of enrollment | Tone: low-commitment offer \u2014 value proof first",
+      "Lapse Risk": "Channel: email+SMS | Message: personalised win-back with bonus points | Offer: double points on next purchase | Timing: within 7 days | Tone: low-commitment offer \u2014 value proof first",
+      "Momentum Builder": "Channel: app push | Message: tier upgrade progress | Offer: tier accelerator bonus | Timing: immediate | Tone: low-commitment offer \u2014 value proof first",
+      "Plateau Cruiser": "Channel: email | Message: personalised recommendation | Offer: curated reward unlock | Timing: monthly | Tone: low-commitment offer \u2014 value proof first",
+      "Brand Advocate": "No members in Program Skeptic x Brand Advocate combination"
+    },
+    "common_states": [
+      "Momentum Builder",
+      "Program Skeptic",
+      "Silent Accumulator"
+    ]
+  },
+  "S04": {
+    "segment_id": "S04",
+    "segment_name": "Silent Accumulator",
+    "description": "Members classified as 'Silent Accumulator' with avg spend $106.0/30d, 2.3 purchases/30d, recency 11 days.",
+    "size": {
+      "count": 126655,
+      "percentage": 25.33
+    },
+    "key_characteristics": {
+      "unique_categories_90d": {
+        "mean": 5.6677,
+        "median": 6.0
+      },
+      "purchase_count_90d": {
+        "mean": 6.3907,
+        "median": 7.0
+      },
+      "channel_diversity_90d": {
+        "mean": 0.4979,
+        "median": 0.4444
+      },
+      "purchase_count_180d": {
+        "mean": 10.9791,
+        "median": 12.0
+      },
+      "purchase_count_30d": {
+        "mean": 2.4196,
+        "median": 2.0
+      }
+    },
+    "cardholder_composition": {
+      "plcc_cardholder_pct": 13.67,
+      "non_cardholder_pct": 86.33
+    },
+    "recommended_activation": {
+      "Silent Accumulator": "Channel: app push | Message: unspent points reminder | Offer: limited-time redemption bonus | Timing: weekly | Tone: simple, transactional framing",
+      "Value Maximizer": "Channel: email | Message: cross-category points multiplier | Offer: category diversity bonus | Timing: mid-month | Tone: simple, transactional framing",
+      "Win-Back Target": "Channel: email+SMS | Message: we miss you | Offer: reactivation bonus points | Timing: immediate | Tone: simple, transactional framing",
+      "Redemption Hunter": "Channel: email+push | Message: targeted flash promotion | Offer: limited-time category reward | Timing: around promotional periods | Tone: simple, transactional framing",
+      "Program Skeptic": "Channel: email | Message: re-permission with value proof | Offer: one-time surprise reward | Timing: monthly | Tone: simple, transactional framing",
+      "New & Uncertain": "Channel: app onboarding | Message: welcome journey | Offer: first-purchase bonus | Timing: within 7 days of enrollment | Tone: simple, transactional framing",
+      "Lapse Risk": "Channel: email+SMS | Message: personalised win-back with bonus points | Offer: double points on next purchase | Timing: within 7 days | Tone: simple, transactional framing",
+      "Momentum Builder": "Channel: app push | Message: tier upgrade progress | Offer: tier accelerator bonus | Timing: immediate | Tone: simple, transactional framing",
+      "Plateau Cruiser": "Channel: email | Message: personalised recommendation | Offer: curated reward unlock | Timing: monthly | Tone: simple, transactional framing",
+      "Brand Advocate": "Channel: app | Message: early access to new reward | Offer: referral bonus | Timing: immediate | Tone: simple, transactional framing"
+    },
+    "common_states": [
+      "Momentum Builder",
+      "Silent Accumulator",
+      "Program Skeptic"
+    ]
+  },
+  "S05": {
+    "segment_id": "S05",
+    "segment_name": "Plateau Cruiser",
+    "description": "Members classified as 'Plateau Cruiser' with avg spend $307.6/30d, 4.5 purchases/30d, recency 6 days.",
+    "size": {
+      "count": 117,
+      "percentage": 0.02
+    },
+    "key_characteristics": {
+      "reward_browse_30d": {
+        "mean": 374.2735,
+        "median": 375.0
+      },
+      "app_open_30d": {
+        "mean": 375.2222,
+        "median": 377.0
+      },
+      "app_open_90d": {
+        "mean": 435.7692,
+        "median": 436.0
+      },
+      "browse_to_purchase_ratio_30d": {
+        "mean": 9.9145,
+        "median": 10.0
+      },
+      "total_session_sec_30d": {
+        "mean": 14848.7265,
+        "median": 15772.0
+      }
+    },
+    "cardholder_composition": {
+      "plcc_cardholder_pct": 29.91,
+      "non_cardholder_pct": 70.09
+    },
+    "recommended_activation": {
+      "Silent Accumulator": "No members in Plateau Cruiser x Silent Accumulator combination",
+      "Value Maximizer": "Channel: email | Message: cross-category points multiplier | Offer: category diversity bonus | Timing: mid-month | Tone: personalised curation framing",
+      "Win-Back Target": "No members in Plateau Cruiser x Win-Back Target combination",
+      "Redemption Hunter": "No members in Plateau Cruiser x Redemption Hunter combination",
+      "Program Skeptic": "Channel: email | Message: re-permission with value proof | Offer: one-time surprise reward | Timing: monthly | Tone: personalised curation framing",
+      "New & Uncertain": "Channel: app onboarding | Message: welcome journey | Offer: first-purchase bonus | Timing: within 7 days of enrollment | Tone: personalised curation framing",
+      "Lapse Risk": "Channel: email+SMS | Message: personalised win-back with bonus points | Offer: double points on next purchase | Timing: within 7 days | Tone: personalised curation framing",
+      "Momentum Builder": "Channel: app push | Message: tier upgrade progress | Offer: tier accelerator bonus | Timing: immediate | Tone: personalised curation framing",
+      "Plateau Cruiser": "Channel: email | Message: personalised recommendation | Offer: curated reward unlock | Timing: monthly | Tone: personalised curation framing",
+      "Brand Advocate": "Channel: app | Message: early access to new reward | Offer: referral bonus | Timing: immediate | Tone: personalised curation framing"
+    },
+    "common_states": [
+      "Brand Advocate",
+      "Momentum Builder",
+      "Program Skeptic"
+    ]
+  }
+}

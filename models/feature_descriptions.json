@@ -1,0 +1,463 @@
+[
+  {
+    "name": "spend_total_7d",
+    "description": "Total spend from purchases in the 7 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "7 days",
+    "computation": "SUM(transaction_amount) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-7 AND obs_date"
+  },
+  {
+    "name": "spend_total_30d",
+    "description": "Total spend from purchases in the 30 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "SUM(transaction_amount) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "spend_total_90d",
+    "description": "Total spend from purchases in the 90 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "SUM(transaction_amount) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-90 AND obs_date"
+  },
+  {
+    "name": "spend_total_180d",
+    "description": "Total spend from purchases in the 180 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "180 days",
+    "computation": "SUM(transaction_amount) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-180 AND obs_date"
+  },
+  {
+    "name": "avg_order_value_30d",
+    "description": "Average transaction value per purchase in the last 30 days",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "spend_total_30d / purchase_count_30d (0 if count is 0)"
+  },
+  {
+    "name": "spend_per_purchase_90d",
+    "description": "Average transaction value per purchase in the last 90 days",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "spend_total_90d / purchase_count_90d (0 if count is 0)"
+  },
+  {
+    "name": "purchase_count_7d",
+    "description": "Number of purchase transactions in the 7 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "7 days",
+    "computation": "COUNT(transaction_id) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-7 AND obs_date"
+  },
+  {
+    "name": "purchase_count_30d",
+    "description": "Number of purchase transactions in the 30 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(transaction_id) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "purchase_count_90d",
+    "description": "Number of purchase transactions in the 90 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "COUNT(transaction_id) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-90 AND obs_date"
+  },
+  {
+    "name": "purchase_count_180d",
+    "description": "Number of purchase transactions in the 180 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "180 days",
+    "computation": "COUNT(transaction_id) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-180 AND obs_date"
+  },
+  {
+    "name": "return_count_30d",
+    "description": "Number of returned transactions in the 30 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(transaction_id) WHERE transaction_type='return' AND transaction_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "return_count_90d",
+    "description": "Number of returned transactions in the 90 days before observation_date",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "COUNT(transaction_id) WHERE transaction_type='return' AND transaction_date BETWEEN obs_date-90 AND obs_date"
+  },
+  {
+    "name": "recency_days",
+    "description": "Number of days since the member's most recent purchase, relative to observation_date. Null for members who have never purchased.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "lifetime",
+    "computation": "(obs_date - MAX(transaction_date)) WHERE transaction_type='purchase'"
+  },
+  {
+    "name": "points_earned_lifetime",
+    "description": "Cumulative points earned from all purchases up to observation_date, reconstructed from transaction-level sums. Excludes post-obs_date transactions.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "lifetime to obs_date",
+    "computation": "SUM(points_earned) WHERE transaction_date <= obs_date"
+  },
+  {
+    "name": "points_redeemed_lifetime",
+    "description": "Cumulative points redeemed (clawed back) up to observation_date, reconstructed from transaction-level sums.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "lifetime to obs_date",
+    "computation": "SUM(points_clawed_back) WHERE transaction_date <= obs_date"
+  },
+  {
+    "name": "redemption_rate",
+    "description": "Ratio of points redeemed to points earned, clipped to [0,1]. High values indicate members who actively burn their rewards.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "lifetime to obs_date",
+    "computation": "points_redeemed_lifetime / (points_earned_lifetime + 1e-6), clipped to [0,1]"
+  },
+  {
+    "name": "hoarding_ratio",
+    "description": "Ratio of current reconstructed point balance to lifetime points earned. High values indicate members sitting on large unspent balances.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "lifetime to obs_date",
+    "computation": "(points_earned_lifetime - points_redeemed_lifetime) / (points_earned_lifetime + 1e-6), clipped to [0,10]"
+  },
+  {
+    "name": "email_open_30d",
+    "description": "Raw count of email open events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='email_open' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "email_click_30d",
+    "description": "Raw count of email click events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='email_click' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "email_click_rate_30d",
+    "description": "Ratio of email clicks to email opens in the last 30 days. Clipped to [0,1]. 0 if no opens.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "email_click_30d / (email_open_30d + 1e-6), clipped to [0,1]"
+  },
+  {
+    "name": "app_open_30d",
+    "description": "Count of mobile app open events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='app_open' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "app_open_90d",
+    "description": "Count of mobile app open events in the 90 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "90 days",
+    "computation": "COUNT(event_id) WHERE event_type='app_open' AND event_date BETWEEN obs_date-90 AND obs_date"
+  },
+  {
+    "name": "push_open_30d",
+    "description": "Count of push notification open events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='push_open' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "reward_browse_30d",
+    "description": "Count of reward catalog browse events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='reward_browse' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "reward_redemption_30d",
+    "description": "Count of reward redemption events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='reward_redemption' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "tier_status_check_30d",
+    "description": "Count of tier status check events in the 30 days before observation_date. High values indicate tier-motivated members.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='tier_status_check' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "support_contact_30d",
+    "description": "Count of support contact events in the 30 days before observation_date. High values may indicate friction or dissatisfaction.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='support_contact' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "total_session_sec_30d",
+    "description": "Total accumulated app or web session duration in seconds in the 30 days before observation_date. Sessions capped at 14,400s to remove outliers.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "SUM(LEAST(session_duration_sec, 14400)) WHERE event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "browse_to_purchase_ratio_30d",
+    "description": "Ratio of reward catalog browse sessions to purchases in the last 30 days. High values indicate browsing without buying.",
+    "source_tables": [
+      "engagement_events",
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "reward_browse_30d / (purchase_count_30d + 1e-6), clipped to [0,10]"
+  },
+  {
+    "name": "browsed_but_never_purchased_30d",
+    "description": "Binary flag: 1 if member had reward browse sessions but zero purchases in the last 30 days.",
+    "source_tables": [
+      "engagement_events",
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "1 if reward_browse_30d > 0 AND purchase_count_30d == 0, else 0"
+  },
+  {
+    "name": "spend_slope_30d",
+    "description": "OLS linear trend slope of weekly purchase spend over the 30 days before observation_date. Positive = growing, negative = declining. 0 if fewer than 2 weekly data points.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "OLS slope of 4 weekly spend buckets using closed-form: (N*sum(xy) - sum(x)*sum(y)) / (N*sum(x^2) - sum(x)^2)"
+  },
+  {
+    "name": "frequency_slope_30d",
+    "description": "OLS linear trend slope of weekly purchase count over the 30 days before observation_date.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "OLS slope of 4 weekly purchase count buckets, same formula as spend_slope_30d"
+  },
+  {
+    "name": "spend_acceleration",
+    "description": "Month-over-month change in spend_slope_30d. Captures whether spending momentum is accelerating or decelerating. 0 for first available month.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days vs prior 30 days",
+    "computation": "spend_slope_30d(t) - spend_slope_30d(t-1 month)"
+  },
+  {
+    "name": "category_diversity_90d",
+    "description": "Ratio of unique merchant categories to total purchases in the last 90 days. 1.0 = every purchase from a different category.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "COUNT(DISTINCT merchant_category) / COUNT(transaction_id) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-90 AND obs_date, clipped to [0,1]"
+  },
+  {
+    "name": "channel_diversity_90d",
+    "description": "Ratio of unique purchase channels to total purchases in the last 90 days. Captures omnichannel breadth.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "COUNT(DISTINCT channel) / COUNT(transaction_id), clipped to [0,1]"
+  },
+  {
+    "name": "unique_categories_90d",
+    "description": "Absolute count of unique merchant categories purchased from in the 90 days before observation_date.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "COUNT(DISTINCT merchant_category) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-90 AND obs_date"
+  },
+  {
+    "name": "unique_channels_90d",
+    "description": "Absolute count of unique purchase channels used in the 90 days before observation_date.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "90 days",
+    "computation": "COUNT(DISTINCT channel) WHERE transaction_type='purchase' AND transaction_date BETWEEN obs_date-90 AND obs_date"
+  },
+  {
+    "name": "tier_ordinal",
+    "description": "Current tier encoded as an ordinal integer: base=0, silver=1, gold=2, platinum=3. Reconstructed as-of observation_date from tier_history JSON.",
+    "source_tables": [
+      "members"
+    ],
+    "temporal_window": "as-of observation_date",
+    "computation": "Parse tier_history JSON, find most recent tier with date <= obs_date, encode as 0/1/2/3"
+  },
+  {
+    "name": "tier_changes_count",
+    "description": "Total number of tier changes (upgrades or downgrades) in the member's lifetime up to observation_date.",
+    "source_tables": [
+      "members"
+    ],
+    "temporal_window": "lifetime to obs_date",
+    "computation": "COUNT(tier_history entries) WHERE date <= obs_date, minus 1 for initial enrollment tier"
+  },
+  {
+    "name": "months_since_last_tier_change",
+    "description": "Number of months between the most recent tier change and observation_date. Null for members who have never changed tier.",
+    "source_tables": [
+      "members"
+    ],
+    "temporal_window": "as-of observation_date",
+    "computation": "DATEDIFF(months, MAX(tier_history.date WHERE date <= obs_date), obs_date)"
+  },
+  {
+    "name": "spend_velocity",
+    "description": "Ratio of 30-day spend to average monthly spend over the preceding 90 days. Values below 1.0 indicate slowing momentum relative to recent history.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30d vs 90d",
+    "computation": "spend_total_30d / (spend_total_90d / 3 + 1e-6)"
+  },
+  {
+    "name": "freq_velocity",
+    "description": "Ratio of 30-day purchase frequency to average monthly frequency over the preceding 90 days.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30d vs 90d",
+    "computation": "purchase_count_30d / (purchase_count_90d / 3 + 1e-6)"
+  },
+  {
+    "name": "app_velocity",
+    "description": "Ratio of 30-day app opens to average monthly app opens over the preceding 90 days.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30d vs 90d",
+    "computation": "app_open_30d / (app_open_90d / 3 + 1e-6)"
+  },
+  {
+    "name": "recency_risk",
+    "description": "Composite recency risk score: days since last purchase multiplied by a low-frequency penalty. Higher = higher lapse risk.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30 days",
+    "computation": "recency_days * clip(1 - purchase_count_30d/10, 0, 1)"
+  },
+  {
+    "name": "engagement_score",
+    "description": "Total digital engagement touchpoints in the last 30 days: sum of app opens, email opens, and push opens.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "app_open_30d + email_open_30d + push_open_30d"
+  },
+  {
+    "name": "spend_decline_flag",
+    "description": "Binary indicator: 1 if spend_velocity < 0.5, meaning recent spend is less than half the 3-month average.",
+    "source_tables": [
+      "transactions"
+    ],
+    "temporal_window": "30d vs 90d",
+    "computation": "1 if spend_velocity < 0.5 else 0"
+  },
+  {
+    "name": "social_share_30d",
+    "description": "Count of social share events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='social_share' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "referral_sent_30d",
+    "description": "Count of referral sent events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='referral_sent' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "survey_completed_30d",
+    "description": "Count of survey completed events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='survey_completed' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "point_balance_check_30d",
+    "description": "Count of point balance check events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='point_balance_check' AND event_date BETWEEN obs_date-30 AND obs_date"
+  },
+  {
+    "name": "profile_update_30d",
+    "description": "Count of profile update events in the 30 days before observation_date.",
+    "source_tables": [
+      "engagement_events"
+    ],
+    "temporal_window": "30 days",
+    "computation": "COUNT(event_id) WHERE event_type='profile_update' AND event_date BETWEEN obs_date-30 AND obs_date"
+  }
+]

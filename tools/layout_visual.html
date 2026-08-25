@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>PPT Layout Visual Audit</title>
+<style>
+  body { background: #1a1a2e; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+  h1 { color: #e66c37; text-align: center; }
+  .slide-container { margin: 30px auto; position: relative; }
+  .slide-label { font-size: 18px; font-weight: bold; color: #e66c37; margin-bottom: 8px; }
+  .slide { position: relative; border: 2px solid #444; overflow: hidden; margin-bottom: 40px; }
+  .shape { position: absolute; border: 1px solid rgba(255,255,255,0.15); overflow: hidden;
+           font-size: 7px; line-height: 1.2; color: #ccc; padding: 1px 2px; box-sizing: border-box; }
+  .shape.text { background: rgba(46, 125, 50, 0.15); border-color: rgba(46, 125, 50, 0.4); }
+  .shape.table { background: rgba(230, 108, 55, 0.2); border-color: rgba(230, 108, 55, 0.5); }
+  .shape.rect { background: rgba(100, 100, 100, 0.08); border-color: rgba(100,100,100,0.2); }
+  .shape:hover { z-index: 999; border-color: #fff !important; background: rgba(255,255,255,0.15) !important; }
+  .shape:hover::after { content: attr(data-info); position: absolute; bottom: -20px; left: 0;
+    background: #000; color: #fff; padding: 2px 5px; font-size: 9px; white-space: nowrap; z-index: 1000; }
+</style></head><body>
+<h1>PPT Layout Visual Audit — All 7 Slides</h1>
+<p style="text-align:center;color:#888;">Green = text | Orange = table | Gray = empty rect/border. Hover for details.</p>
+<div class="slide-container" style="width:1300.0px;">
+<div class="slide-label">Slide 1</div>
+<div class="slide" style="width:1300.0px; height:731.25px; background:#1b212c;">
+  <div class="shape rect" style="left:780px;top:-390px;width:975px;height:975px;" data-info="#0 (6.00,-3.00)-(13.50,4.50)" title=""></div>
+  <div class="shape rect" style="left:910px;top:325px;width:780px;height:780px;" data-info="#1 (7.00,2.50)-(13.00,8.50)" title=""></div>
+  <div class="shape text" style="left:65px;top:72px;width:780px;height:39px;" data-info="#2 (0.50,0.55)-(6.50,0.85)" title="KOBIE LAUNCHPAD AI HACKATHON">KOBIE LAUNCHPAD AI HACKATHON</div>
+  <div class="shape text" style="left:65px;top:110px;width:780px;height:39px;" data-info="#3 (0.50,0.85)-(6.50,1.15)" title="Solution Presentation">Solution Presentation</div>
+  <div class="shape text" style="left:65px;top:182px;width:910px;height:78px;" data-info="#4 (0.50,1.40)-(7.50,2.00)" title="TBIE">TBIE</div>
+  <div class="shape text" style="left:65px;top:273px;width:910px;height:46px;" data-info="#5 (0.50,2.10)-(7.50,2.45)" title="Temporal Behavioural Intelligence Engine">Temporal Behavioural Intelligence Engine</div>
+  <div class="shape text" style="left:65px;top:338px;width:910px;height:39px;" data-info="#6 (0.50,2.60)-(7.50,2.90)" title="Track C: Dynamic Member Segmentation & Activation">Track C: Dynamic Member Segmentation & A</div>
+  <div class="shape rect" style="left:65px;top:416px;width:650px;height:169px;" data-info="#7 (0.50,3.20)-(5.50,4.50)" title=""></div>
+  <div class="shape text" style="left:91px;top:432px;width:598px;height:143px;" data-info="#8 (0.70,3.32)-(5.30,4.42)" title="Team Members
+Samarth Vinod Hosalli (PES1UG23AM261)
+Siddarth ">Team Members
+Samarth Vinod Hosalli (PES1</div>
+  <div class="shape text" style="left:65px;top:618px;width:520px;height:32px;" data-info="#9 (0.50,4.75)-(4.50,5.00)" title="PES University">PES University</div>
+  <div class="shape rect" style="left:845px;top:195px;width:390px;height:351px;" data-info="#10 (6.50,1.50)-(9.50,4.20)" title=""></div>
+  <div class="shape text" style="left:871px;top:208px;width:325px;height:29px;" data-info="#11 (6.70,1.60)-(9.20,1.82)" title="0.8138">0.8138</div>
+  <div class="shape text" style="left:871px;top:237px;width:325px;height:21px;" data-info="#12 (6.70,1.82)-(9.20,1.98)" title="Macro F1 (Test)">Macro F1 (Test)</div>
+  <div class="shape text" style="left:871px;top:270px;width:325px;height:29px;" data-info="#13 (6.70,2.08)-(9.20,2.30)" title="5">5</div>
+  <div class="shape text" style="left:871px;top:299px;width:325px;height:21px;" data-info="#14 (6.70,2.30)-(9.20,2.46)" title="Segments">Segments</div>
+  <div class="shape text" style="left:871px;top:333px;width:325px;height:29px;" data-info="#15 (6.70,2.56)-(9.20,2.78)" title="10">10</div>
+  <div class="shape text" style="left:871px;top:361px;width:325px;height:21px;" data-info="#16 (6.70,2.78)-(9.20,2.94)" title="States">States</div>
+  <div class="shape text" style="left:871px;top:395px;width:325px;height:29px;" data-info="#17 (6.70,3.04)-(9.20,3.26)" title="500,000">500,000</div>
+  <div class="shape text" style="left:871px;top:424px;width:325px;height:21px;" data-info="#18 (6.70,3.26)-(9.20,3.42)" title="Members">Members</div>
+  <div class="shape text" style="left:871px;top:458px;width:325px;height:29px;" data-info="#19 (6.70,3.52)-(9.20,3.74)" title="119">119</div>
+  <div class="shape text" style="left:871px;top:486px;width:325px;height:21px;" data-info="#20 (6.70,3.74)-(9.20,3.90)" title="Features Built">Features Built</div>
+</div></div>
+<div class="slide-container" style="width:1300.0px;">
+<div class="slide-label">Slide 2</div>
+<div class="slide" style="width:1300.0px; height:731.25px; background:#fdfbf7;">
+  <div class="shape rect" style="left:0px;top:695px;width:1300px;height:36px;" data-info="#0 (0.00,5.34)-(10.00,5.62)" title=""></div>
+  <div class="shape text" style="left:46px;top:696px;width:455px;height:32px;" data-info="#1 (0.35,5.36)-(3.85,5.61)" title="KOBIE LAUNCHPAD AI HACKATHON">KOBIE LAUNCHPAD AI HACKATHON</div>
+  <div class="shape text" style="left:1144px;top:696px;width:117px;height:32px;" data-info="#2 (8.80,5.36)-(9.70,5.61)" title="1 / 7">1 / 7</div>
+  <div class="shape text" style="left:65px;top:32px;width:910px;height:65px;" data-info="#3 (0.50,0.25)-(7.50,0.75)" title="Problem & Our Approach">Problem & Our Approach</div>
+  <div class="shape text" style="left:65px;top:110px;width:390px;height:32px;" data-info="#4 (0.50,0.85)-(3.50,1.10)" title="THE CORE CHALLENGE">THE CORE CHALLENGE</div>
+  <div class="shape rect" style="left:65px;top:143px;width:559px;height:312px;" data-info="#5 (0.50,1.10)-(4.80,3.50)" title=""></div>
+  <div class="shape text" style="left:84px;top:150px;width:520px;height:299px;" data-info="#6 (0.65,1.15)-(4.65,3.45)" title="The real challenge is not segmentation — it is separating si">The real challenge is not segmentation —</div>
+  <div class="shape text" style="left:676px;top:110px;width:390px;height:32px;" data-info="#7 (5.20,0.85)-(8.20,1.10)" title="OUR KEY INSIGHT">OUR KEY INSIGHT</div>
+  <div class="shape rect" style="left:676px;top:143px;width:559px;height:312px;" data-info="#8 (5.20,1.10)-(9.50,3.50)" title=""></div>
+  <div class="shape text" style="left:696px;top:150px;width:520px;height:299px;" data-info="#9 (5.35,1.15)-(9.35,3.45)" title="A member's segment tells you who they are over months. Their">A member's segment tells you who they ar</div>
+  <div class="shape rect" style="left:65px;top:474px;width:1170px;height:202px;" data-info="#10 (0.50,3.65)-(9.50,5.20)" title=""></div>
+  <div class="shape rect" style="left:65px;top:474px;width:1170px;height:10px;" data-info="#11 (0.50,3.65)-(9.50,3.73)" title=""></div>
+  <div class="shape text" style="left:84px;top:488px;width:1040px;height:26px;" data-info="#12 (0.65,3.75)-(8.65,3.95)" title="DATA QUALITY — 8 ISSUES FOUND & RESOLVED IN EDA">DATA QUALITY — 8 ISSUES FOUND & RESOLVED</div>
+  <div class="shape table" style="left:84px;top:514px;width:1131px;height:150px;" data-info="#13 (0.65,3.95)-(9.35,5.10)" title="TABLE[9x4]">TABLE[9x4]</div>
+</div></div>
+<div class="slide-container" style="width:1300.0px;">
+<div class="slide-label">Slide 3</div>
+<div class="slide" style="width:1300.0px; height:731.25px; background:#fdfbf7;">
+  <div class="shape rect" style="left:0px;top:695px;width:1300px;height:36px;" data-info="#0 (0.00,5.34)-(10.00,5.62)" title=""></div>
+  <div class="shape text" style="left:46px;top:696px;width:455px;height:32px;" data-info="#1 (0.35,5.36)-(3.85,5.61)" title="KOBIE LAUNCHPAD AI HACKATHON">KOBIE LAUNCHPAD AI HACKATHON</div>
+  <div class="shape text" style="left:1144px;top:696px;width:117px;height:32px;" data-info="#2 (8.80,5.36)-(9.70,5.61)" title="2 / 7">2 / 7</div>
+  <div class="shape text" style="left:65px;top:32px;width:910px;height:65px;" data-info="#3 (0.50,0.25)-(7.50,0.75)" title="Architecture & Technical Design">Architecture & Technical Design</div>
+  <div class="shape rect" style="left:65px;top:110px;width:1170px;height:351px;" data-info="#4 (0.50,0.85)-(9.50,3.55)" title=""></div>
+  <div class="shape rect" style="left:65px;top:110px;width:1170px;height:10px;" data-info="#5 (0.50,0.85)-(9.50,0.93)" title=""></div>
+  <div class="shape rect" style="left:325px;top:124px;width:650px;height:39px;" data-info="#6 (2.50,0.95)-(7.50,1.25)" title=""></div>
+  <div class="shape text" style="left:338px;top:126px;width:624px;height:32px;" data-info="#7 (2.60,0.97)-(7.40,1.22)" title="RAW DATA: members (500K) | transactions (17.8M) | engagement">RAW DATA: members (500K) | transactions </div>
+  <div class="shape text" style="left:624px;top:162px;width:52px;height:20px;" data-info="#8 (4.80,1.25)-(5.20,1.40)" title="▼">▼</div>
+  <div class="shape rect" style="left:91px;top:179px;width:1118px;height:49px;" data-info="#9 (0.70,1.38)-(9.30,1.76)" title=""></div>
+  <div class="shape text" style="left:104px;top:182px;width:1092px;height:44px;" data-info="#10 (0.80,1.40)-(9.20,1.74)" title="[01] Raw Validation (src/01_validate_raw.py)
+88,717 ghost ID">[01] Raw Validation (src/01_validate_raw</div>
+  <div class="shape text" style="left:624px;top:229px;width:52px;height:16px;" data-info="#11 (4.80,1.76)-(5.20,1.88)" title="▼">▼</div>
+  <div class="shape rect" style="left:91px;top:244px;width:540px;height:49px;" data-info="#12 (0.70,1.88)-(4.85,2.26)" title=""></div>
+  <div class="shape text" style="left:104px;top:247px;width:520px;height:44px;" data-info="#13 (0.80,1.90)-(4.80,2.24)" title="[02] Member Spine
+500K real members | tenure_days clipped ≥ ">[02] Member Spine
+500K real members | te</div>
+  <div class="shape rect" style="left:670px;top:244px;width:540px;height:49px;" data-info="#14 (5.15,1.88)-(9.30,2.26)" title=""></div>
+  <div class="shape text" style="left:682px;top:247px;width:520px;height:44px;" data-info="#15 (5.25,1.90)-(9.25,2.24)" title="[03] Snapshot Builder
+4 windows: 7d/30d/90d/180d | session c">[03] Snapshot Builder
+4 windows: 7d/30d/</div>
+  <div class="shape text" style="left:624px;top:294px;width:52px;height:16px;" data-info="#16 (4.80,2.26)-(5.20,2.38)" title="▼">▼</div>
+  <div class="shape rect" style="left:91px;top:309px;width:540px;height:49px;" data-info="#17 (0.70,2.38)-(4.85,2.76)" title=""></div>
+  <div class="shape text" style="left:104px;top:312px;width:520px;height:44px;" data-info="#18 (0.80,2.40)-(4.80,2.74)" title="[04] Feature Engineering (119 features)
+OLS spend slope | 6 ">[04] Feature Engineering (119 features)
+</div>
+  <div class="shape rect" style="left:670px;top:309px;width:540px;height:49px;" data-info="#19 (5.15,2.38)-(9.30,2.76)" title=""></div>
+  <div class="shape text" style="left:682px;top:312px;width:520px;height:44px;" data-info="#20 (5.25,2.40)-(9.25,2.74)" title="[05] Feature Validation
+Range + nullity checks on all 119 fe">[05] Feature Validation
+Range + nullity </div>
+  <div class="shape text" style="left:234px;top:359px;width:52px;height:16px;" data-info="#21 (1.80,2.76)-(2.20,2.88)" title="▼">▼</div>
+  <div class="shape text" style="left:624px;top:359px;width:52px;height:16px;" data-info="#22 (4.80,2.76)-(5.20,2.88)" title="▼">▼</div>
+  <div class="shape text" style="left:1014px;top:359px;width:52px;height:16px;" data-info="#23 (7.80,2.76)-(8.20,2.88)" title="▼">▼</div>
+  <div class="shape rect" style="left:91px;top:374px;width:364px;height:78px;" data-info="#24 (0.70,2.88)-(3.50,3.48)" title=""></div>
+  <div class="shape text" style="left:104px;top:377px;width:338px;height:72px;" data-info="#25 (0.80,2.90)-(3.40,3.45)" title="[06] Segment Assignment
+FROZEN K-Means k=5
+40 features → Sca">[06] Segment Assignment
+FROZEN K-Means k</div>
+  <div class="shape rect" style="left:468px;top:374px;width:364px;height:78px;" data-info="#26 (3.60,2.88)-(6.40,3.48)" title=""></div>
+  <div class="shape text" style="left:481px;top:377px;width:338px;height:72px;" data-info="#27 (3.70,2.90)-(6.30,3.45)" title="[07] State Mapping
+10-rule priority cascade
+numpy.select, &l">[07] State Mapping
+10-rule priority casc</div>
+  <div class="shape rect" style="left:845px;top:374px;width:364px;height:78px;" data-info="#28 (6.50,2.88)-(9.30,3.48)" title=""></div>
+  <div class="shape text" style="left:858px;top:377px;width:338px;height:72px;" data-info="#29 (6.60,2.90)-(9.20,3.45)" title="[08] Transition Prediction
+FROZEN XGBoost, 49 features
+multi">[08] Transition Prediction
+FROZEN XGBoos</div>
+  <div class="shape rect" style="left:65px;top:481px;width:390px;height:195px;" data-info="#30 (0.50,3.70)-(3.50,5.20)" title=""></div>
+  <div class="shape text" style="left:84px;top:488px;width:325px;height:23px;" data-info="#31 (0.65,3.75)-(3.15,3.93)" title="KEY TECH CHOICES">KEY TECH CHOICES</div>
+  <div class="shape text" style="left:84px;top:514px;width:351px;height:156px;" data-info="#32 (0.65,3.95)-(3.35,5.15)" title="K-Means (sklearn 1.9): Hard assignment, seed=42. Correct for">K-Means (sklearn 1.9): Hard assignment, </div>
+  <div class="shape rect" style="left:468px;top:481px;width:390px;height:195px;" data-info="#33 (3.60,3.70)-(6.60,5.20)" title=""></div>
+  <div class="shape text" style="left:488px;top:488px;width:325px;height:23px;" data-info="#34 (3.75,3.75)-(6.25,3.93)" title="DESIGN DECISIONS">DESIGN DECISIONS</div>
+  <div class="shape text" style="left:488px;top:514px;width:351px;height:156px;" data-info="#35 (3.75,3.95)-(6.45,5.15)" title="k=5 vs k=7: k=5: CH 77,123, F1 0.8138. k=7: 2 centroids with">k=5 vs k=7: k=5: CH 77,123, F1 0.8138. k</div>
+  <div class="shape rect" style="left:871px;top:481px;width:364px;height:195px;" data-info="#36 (6.70,3.70)-(9.50,5.20)" title=""></div>
+  <div class="shape text" style="left:890px;top:488px;width:325px;height:23px;" data-info="#37 (6.85,3.75)-(9.35,3.93)" title="ERROR HANDLING">ERROR HANDLING</div>
+  <div class="shape text" style="left:890px;top:514px;width:325px;height:156px;" data-info="#38 (6.85,3.95)-(9.35,5.15)" title="• No purchases: fillna(999) → routes to Win-Back / Lapse Ris">• No purchases: fillna(999) → routes to </div>
+</div></div>
+<div class="slide-container" style="width:1300.0px;">
+<div class="slide-label">Slide 4</div>
+<div class="slide" style="width:1300.0px; height:731.25px; background:#fdfbf7;">
+  <div class="shape rect" style="left:0px;top:695px;width:1300px;height:36px;" data-info="#0 (0.00,5.34)-(10.00,5.62)" title=""></div>
+  <div class="shape text" style="left:46px;top:696px;width:455px;height:32px;" data-info="#1 (0.35,5.36)-(3.85,5.61)" title="KOBIE LAUNCHPAD AI HACKATHON">KOBIE LAUNCHPAD AI HACKATHON</div>
+  <div class="shape text" style="left:1144px;top:696px;width:117px;height:32px;" data-info="#2 (8.80,5.36)-(9.70,5.61)" title="3 / 7">3 / 7</div>
+  <div class="shape text" style="left:65px;top:32px;width:910px;height:65px;" data-info="#3 (0.50,0.25)-(7.50,0.75)" title="Results & Key Outputs">Results & Key Outputs</div>
+  <div class="shape text" style="left:65px;top:110px;width:520px;height:32px;" data-info="#4 (0.50,0.85)-(4.50,1.10)" title="SEGMENTS DISCOVERED (December 31, 2025)">SEGMENTS DISCOVERED (December 31, 2025)</div>
+  <div class="shape rect" style="left:65px;top:143px;width:624px;height:325px;" data-info="#5 (0.50,1.10)-(5.30,3.60)" title=""></div>
+  <div class="shape table" style="left:78px;top:150px;width:598px;height:130px;" data-info="#6 (0.60,1.15)-(5.20,2.15)" title="TABLE[6x6]">TABLE[6x6]</div>
+  <div class="shape text" style="left:78px;top:292px;width:598px;height:156px;" data-info="#7 (0.60,2.25)-(5.20,3.45)" title="Why k=5?
+Highest Calinski-Harabasz (77,123). k=6 produced 2 ">Why k=5?
+Highest Calinski-Harabasz (77,1</div>
+  <div class="shape text" style="left:715px;top:110px;width:520px;height:32px;" data-info="#8 (5.50,0.85)-(9.50,1.10)" title="MODEL PERFORMANCE">MODEL PERFORMANCE</div>
+  <div class="shape rect" style="left:715px;top:143px;width:520px;height:325px;" data-info="#9 (5.50,1.10)-(9.50,3.60)" title=""></div>
+  <div class="shape text" style="left:728px;top:150px;width:494px;height:130px;" data-info="#10 (5.60,1.15)-(9.40,2.15)" title="Cluster Quality (K-Means):
+• Calinski-Harabasz: 77,123 (Extr">Cluster Quality (K-Means):
+• Calinski-Ha</div>
+  <div class="shape rect" style="left:65px;top:488px;width:1170px;height:188px;" data-info="#11 (0.50,3.75)-(9.50,5.20)" title=""></div>
+  <div class="shape rect" style="left:65px;top:488px;width:1170px;height:10px;" data-info="#12 (0.50,3.75)-(9.50,3.83)" title=""></div>
+  <div class="shape text" style="left:84px;top:497px;width:520px;height:23px;" data-info="#13 (0.65,3.82)-(4.65,4.00)" title="ALGORITHM COMPARISON (50K Subsample)">ALGORITHM COMPARISON (50K Subsample)</div>
+  <div class="shape table" style="left:84px;top:523px;width:1131px;height:130px;" data-info="#14 (0.65,4.02)-(9.35,5.02)" title="TABLE[7x3]">TABLE[7x3]</div>
+</div></div>
+<div class="slide-container" style="width:1300.0px;">
+<div class="slide-label">Slide 5</div>
+<div class="slide" style="width:1300.0px; height:731.25px; background:#fdfbf7;">
+  <div class="shape rect" style="left:0px;top:695px;width:1300px;height:36px;" data-info="#0 (0.00,5.34)-(10.00,5.62)" title=""></div>
+  <div class="shape text" style="left:46px;top:696px;width:455px;height:32px;" data-info="#1 (0.35,5.36)-(3.85,5.61)" title="KOBIE LAUNCHPAD AI HACKATHON">KOBIE LAUNCHPAD AI HACKATHON</div>
+  <div class="shape text" style="left:1144px;top:696px;width:117px;height:32px;" data-info="#2 (8.80,5.36)-(9.70,5.61)" title="4 / 7">4 / 7</div>
+  <div class="shape text" style="left:65px;top:32px;width:910px;height:65px;" data-info="#3 (0.50,0.25)-(7.50,0.75)" title="Business Impact & Activation">Business Impact & Activation</div>
+  <div class="shape text" style="left:65px;top:110px;width:520px;height:32px;" data-info="#4 (0.50,0.85)-(4.50,1.10)" title="ACTIVATION STRATEGY (Segment × State)">ACTIVATION STRATEGY (Segment × State)</div>
+  <div class="shape rect" style="left:65px;top:143px;width:559px;height:533px;" data-info="#5 (0.50,1.10)-(4.80,5.20)" title=""></div>
+  <div class="shape text" style="left:78px;top:150px;width:533px;height:130px;" data-info="#6 (0.60,1.15)-(4.70,2.15)" title="❶ High-Tier Accelerator in Lapse Risk
+(Historically $689/mo,">❶ High-Tier Accelerator in Lapse Risk
+(H</div>
+  <div class="shape text" style="left:78px;top:286px;width:533px;height:130px;" data-info="#7 (0.60,2.20)-(4.70,3.20)" title="❷ Program Skeptic in Momentum Builder
+(Ignores program, but ">❷ Program Skeptic in Momentum Builder
+(I</div>
+  <div class="shape text" style="left:78px;top:422px;width:533px;height:117px;" data-info="#8 (0.60,3.25)-(4.70,4.15)" title="❸ Silent Accumulator in Win-Back Target
+($106/mo across 5 ca">❸ Silent Accumulator in Win-Back Target
+</div>
+  <div class="shape text" style="left:676px;top:110px;width:520px;height:32px;" data-info="#9 (5.20,0.85)-(9.20,1.10)" title="SO WHAT — THE BUSINESS CASE">SO WHAT — THE BUSINESS CASE</div>
+  <div class="shape rect" style="left:676px;top:143px;width:559px;height:260px;" data-info="#10 (5.20,1.10)-(9.50,3.10)" title=""></div>
+  <div class="shape text" style="left:689px;top:150px;width:533px;height:240px;" data-info="#11 (5.30,1.15)-(9.40,3.00)" title="Why a loyalty manager should care:
+Traditional RFM collapses">Why a loyalty manager should care:
+Tradi</div>
+  <div class="shape rect" style="left:676px;top:422px;width:559px;height:254px;" data-info="#12 (5.20,3.25)-(9.50,5.20)" title=""></div>
+  <div class="shape rect" style="left:676px;top:422px;width:559px;height:10px;" data-info="#13 (5.20,3.25)-(9.50,3.33)" title=""></div>
+  <div class="shape text" style="left:696px;top:436px;width:520px;height:23px;" data-info="#14 (5.35,3.35)-(9.35,3.53)" title="PLCC CARDHOLDER INSIGHT">PLCC CARDHOLDER INSIGHT</div>
+  <div class="shape text" style="left:696px;top:462px;width:520px;height:39px;" data-info="#15 (5.35,3.55)-(9.35,3.85)" title="Card status was NOT used to build clusters, yet segments nat">Card status was NOT used to build cluste</div>
+  <div class="shape table" style="left:696px;top:507px;width:520px;height:156px;" data-info="#16 (5.35,3.90)-(9.35,5.10)" title="TABLE[5x4]">TABLE[5x4]</div>
+</div></div>
+<div class="slide-container" style="width:1300.0px;">
+<div class="slide-label">Slide 6</div>
+<div class="slide" style="width:1300.0px; height:731.25px; background:#1b212c;">
+  <div class="shape rect" style="left:0px;top:695px;width:1300px;height:36px;" data-info="#0 (0.00,5.34)-(10.00,5.62)" title=""></div>
+  <div class="shape text" style="left:46px;top:696px;width:455px;height:32px;" data-info="#1 (0.35,5.36)-(3.85,5.61)" title="KOBIE LAUNCHPAD AI HACKATHON">KOBIE LAUNCHPAD AI HACKATHON</div>
+  <div class="shape text" style="left:1144px;top:696px;width:117px;height:32px;" data-info="#2 (8.80,5.36)-(9.70,5.61)" title="5 / 7">5 / 7</div>
+  <div class="shape text" style="left:65px;top:32px;width:910px;height:65px;" data-info="#3 (0.50,0.25)-(7.50,0.75)" title="Live Demo Highlights">Live Demo Highlights</div>
+  <div class="shape text" style="left:65px;top:98px;width:910px;height:39px;" data-info="#4 (0.50,0.75)-(7.50,1.05)" title="Show, don't tell. Walk the judges through a live run or key ">Show, don't tell. Walk the judges throug</div>
+  <div class="shape rect" style="left:65px;top:150px;width:1170px;height:143px;" data-info="#5 (0.50,1.15)-(9.50,2.25)" title=""></div>
+  <div class="shape text" style="left:78px;top:162px;width:520px;height:26px;" data-info="#6 (0.60,1.25)-(4.60,1.45)" title="1. PIPELINE EXECUTION">1. PIPELINE EXECUTION</div>
+  <div class="shape rect" style="left:84px;top:195px;width:780px;height:32px;" data-info="#7 (0.65,1.50)-(6.65,1.75)" title=""></div>
+  <div class="shape text" style="left:91px;top:198px;width:780px;height:26px;" data-info="#8 (0.70,1.52)-(6.70,1.72)" title="&gt; python pipeline.py --data_dir ./data/train/ --observati">&gt; python pipeline.py --data_dir ./dat</div>
+  <div class="shape text" style="left:84px;top:234px;width:780px;height:52px;" data-info="#9 (0.65,1.80)-(6.65,2.20)" title="✓ Single command → all 5 output files
+✓ Auto-installs deps |">✓ Single command → all 5 output files
+✓ </div>
+  <div class="shape text" style="left:884px;top:162px;width:260px;height:26px;" data-info="#10 (6.80,1.25)-(8.80,1.45)" title="OUTPUT FILES:">OUTPUT FILES:</div>
+  <div class="shape text" style="left:884px;top:188px;width:325px;height:91px;" data-info="#11 (6.80,1.45)-(9.30,2.15)" title="segment_assignments.csv (500K)
+state_assignments.csv     (50">segment_assignments.csv (500K)
+state_ass</div>
+  <div class="shape rect" style="left:65px;top:312px;width:1170px;height:130px;" data-info="#12 (0.50,2.40)-(9.50,3.40)" title=""></div>
+  <div class="shape text" style="left:78px;top:325px;width:520px;height:26px;" data-info="#13 (0.60,2.50)-(4.60,2.70)" title="2. TEMPORAL FLEXIBILITY">2. TEMPORAL FLEXIBILITY</div>
+  <div class="shape rect" style="left:84px;top:358px;width:520px;height:32px;" data-info="#14 (0.65,2.75)-(4.65,3.00)" title=""></div>
+  <div class="shape text" style="left:91px;top:360px;width:520px;height:26px;" data-info="#15 (0.70,2.77)-(4.70,2.97)" title="&gt; python pipeline.py --observation_date 2025-04-29">&gt; python pipeline.py --observation_da</div>
+  <div class="shape rect" style="left:624px;top:358px;width:520px;height:32px;" data-info="#16 (4.80,2.75)-(8.80,3.00)" title=""></div>
+  <div class="shape text" style="left:630px;top:360px;width:520px;height:26px;" data-info="#17 (4.85,2.77)-(8.85,2.97)" title="&gt; python pipeline.py --observation_date 2025-08-31">&gt; python pipeline.py --observation_da</div>
+  <div class="shape text" style="left:84px;top:396px;width:1040px;height:39px;" data-info="#18 (0.65,3.05)-(8.65,3.35)" title="✓ All dates dynamic — NOTHING hardcoded | Frozen centroids (">✓ All dates dynamic — NOTHING hardcoded </div>
+  <div class="shape rect" style="left:65px;top:462px;width:1170px;height:208px;" data-info="#19 (0.50,3.55)-(9.50,5.15)" title=""></div>
+  <div class="shape text" style="left:78px;top:474px;width:1040px;height:26px;" data-info="#20 (0.60,3.65)-(8.60,3.85)" title="3. OUTPUT WALKTHROUGH — Trace Member MBR_0000004 End-to-End">3. OUTPUT WALKTHROUGH — Trace Member MBR</div>
+  <div class="shape table" style="left:84px;top:507px;width:1131px;height:110px;" data-info="#21 (0.65,3.90)-(9.35,4.75)" title="TABLE[5x4]">TABLE[5x4]</div>
+  <div class="shape rect" style="left:84px;top:630px;width:1131px;height:26px;" data-info="#22 (0.65,4.85)-(9.35,5.05)" title=""></div>
+  <div class="shape text" style="left:91px;top:633px;width:1105px;height:20px;" data-info="#23 (0.70,4.87)-(9.20,5.02)" title="→ ACTION: Send tier upgrade nudge immediately. Spend slope 2">→ ACTION: Send tier upgrade nudge immedi</div>
+</div></div>
+<div class="slide-container" style="width:1300.0px;">
+<div class="slide-label">Slide 7</div>
+<div class="slide" style="width:1300.0px; height:731.25px; background:#fdfbf7;">
+  <div class="shape rect" style="left:0px;top:695px;width:1300px;height:36px;" data-info="#0 (0.00,5.34)-(10.00,5.62)" title=""></div>
+  <div class="shape text" style="left:46px;top:696px;width:455px;height:32px;" data-info="#1 (0.35,5.36)-(3.85,5.61)" title="KOBIE LAUNCHPAD AI HACKATHON">KOBIE LAUNCHPAD AI HACKATHON</div>
+  <div class="shape text" style="left:1144px;top:696px;width:117px;height:32px;" data-info="#2 (8.80,5.36)-(9.70,5.61)" title="6 / 7">6 / 7</div>
+  <div class="shape text" style="left:65px;top:32px;width:910px;height:65px;" data-info="#3 (0.50,0.25)-(7.50,0.75)" title="Learnings, Limitations & Next Steps">Learnings, Limitations & Next Steps</div>
+  <div class="shape text" style="left:65px;top:110px;width:520px;height:32px;" data-info="#4 (0.50,0.85)-(4.50,1.10)" title="WHAT WE LEARNED">WHAT WE LEARNED</div>
+  <div class="shape rect" style="left:65px;top:143px;width:559px;height:325px;" data-info="#5 (0.50,1.10)-(4.80,3.60)" title=""></div>
+  <div class="shape text" style="left:84px;top:150px;width:520px;height:312px;" data-info="#6 (0.65,1.15)-(4.65,3.55)" title="What surprised us:
+The Loyalty Gradient: Members don't form ">What surprised us:
+The Loyalty Gradient:</div>
+  <div class="shape text" style="left:676px;top:110px;width:520px;height:32px;" data-info="#7 (5.20,0.85)-(9.20,1.10)" title="HONEST LIMITATIONS">HONEST LIMITATIONS</div>
+  <div class="shape rect" style="left:676px;top:143px;width:559px;height:260px;" data-info="#8 (5.20,1.10)-(9.50,3.10)" title=""></div>
+  <div class="shape text" style="left:696px;top:150px;width:520px;height:247px;" data-info="#9 (5.35,1.15)-(9.35,3.05)" title="Where the model struggles:
+• Program Skeptic is a catch-all ">Where the model struggles:
+• Program Ske</div>
+  <div class="shape rect" style="left:65px;top:488px;width:559px;height:182px;" data-info="#10 (0.50,3.75)-(4.80,5.15)" title=""></div>
+  <div class="shape rect" style="left:65px;top:488px;width:559px;height:10px;" data-info="#11 (0.50,3.75)-(4.80,3.83)" title=""></div>
+  <div class="shape text" style="left:84px;top:497px;width:520px;height:23px;" data-info="#12 (0.65,3.82)-(4.65,4.00)" title="INDIVIDUAL CONTRIBUTIONS">INDIVIDUAL CONTRIBUTIONS</div>
+  <div class="shape table" style="left:84px;top:526px;width:520px;height:130px;" data-info="#13 (0.65,4.05)-(4.65,5.05)" title="TABLE[3x3]">TABLE[3x3]</div>
+  <div class="shape rect" style="left:676px;top:422px;width:559px;height:247px;" data-info="#14 (5.20,3.25)-(9.50,5.15)" title=""></div>
+  <div class="shape rect" style="left:676px;top:422px;width:559px;height:10px;" data-info="#15 (5.20,3.25)-(9.50,3.33)" title=""></div>
+  <div class="shape text" style="left:696px;top:432px;width:520px;height:23px;" data-info="#16 (5.35,3.32)-(9.35,3.50)" title="IF WE HAD MORE TIME">IF WE HAD MORE TIME</div>
+  <div class="shape text" style="left:696px;top:458px;width:520px;height:195px;" data-info="#17 (5.35,3.52)-(9.35,5.02)" title="Hidden Markov Model (HMM) for States:
+Replace hardcoded 10-r">Hidden Markov Model (HMM) for States:
+Re</div>
+</div></div>
+</body></html>

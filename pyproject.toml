@@ -1,0 +1,41 @@
+[project]
+name = "tbie"
+version = "1.0.0"
+description = "Temporal Behavioural Intelligence Engine — loyalty segment, state and transition inference"
+requires-python = ">=3.12,<3.14"
+readme = "README.md"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::FutureWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Presentation/deck tooling — not part of the inference path.
+extend-exclude = ["tools/"]
+
+[tool.ruff.lint]
+select = [
+    "F",      # pyflakes — undefined names, unused imports, dead code
+    "E9",     # syntax / IO errors
+    "B",      # bugbear — likely bugs
+    "UP",     # pyupgrade
+    "I",      # import sorting
+]
+ignore = [
+    "E501",   # line length is advisory here; tables and rule strings run long
+    "B905",   # zip() strict= — not required on the pinned Python
+]
+
+[tool.ruff.lint.per-file-ignores]
+# The phase scripts are top-to-bottom procedural pipelines by design: they run
+# on import, and their imports are deliberately grouped after the stdout
+# reconfigure. They are not libraries.
+"src/0*.py" = ["E402"]
+"pipeline.py" = ["E402"]
+"tests/*" = ["E402"]

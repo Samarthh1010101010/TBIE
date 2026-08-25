@@ -1,0 +1,70 @@
+# ── Raw data (too large for GitHub — place manually in data/train/) ──────────
+data/train/
+data/train/*.parquet
+
+# ── Generated intermediates (regenerate by running the pipeline) ───────────
+# Everything below is derived from data/train/ plus the two frozen model files.
+# Nothing here is an input, so none of it belongs in version control: it was
+# ~270 MB of tracked parquet/CSV, which makes the repo slow to clone and
+# pushes it past what GitHub is comfortable serving.
+snapshots/
+features/
+states/
+segments/*.parquet
+outputs/*.csv
+outputs/*.parquet
+outputs/*/
+
+# Ablation and experiment models — regenerate with the flags that produced them:
+#   segment_transition_model_noLag.pkl  -> --no-lag-features --tag noLag
+#   segment_transition_model_tuned.pkl  -> src/13_tune_hyperparams.py
+models/segment_transition_model_*.pkl
+
+# The frozen models ARE inputs to inference — these two stay tracked.
+!segments/segment_model.pkl
+!models/segment_transition_model.pkl
+
+# ── Python cache ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ───────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── IDE / OS ───────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.user
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Jupyter ───────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Logs and temp ─────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.temp
+scratch/
+
+# ── KEEP these (committed to repo) ────────────────────────────────────────
+# segments/segment_model.pkl              — frozen K-Means (inference input)
+# models/segment_transition_model.pkl     — frozen XGBoost (inference input)
+# models/*.json                           — state + feature definitions
+# outputs/*.json, outputs/*.md            — small human-readable deliverables
+# docs/                                   — design docs and phase findings
+# src/, tests/, pipeline.py
+# requirements.txt, README.md, METHODOLOGY.md

@@ -1,0 +1,22 @@
+# Large regenerable artifacts — the pipeline rebuilds these from raw data.
+features/
+snapshots/
+states/
+segments/*.parquet
+outputs/
+data/
+
+# Presentation tooling, not part of the inference path.
+tools/
+*.pptx
+*.pdf
+
+# VCS and local environments
+.git/
+.github/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/

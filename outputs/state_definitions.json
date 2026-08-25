@@ -1,0 +1,159 @@
+{
+  "New & Uncertain": {
+    "state_id": 1,
+    "meaning": "Member is newly enrolled or has insufficient transaction history to reliably classify. Too few data points to determine behavioral archetype.",
+    "key_signals": [
+      "tenure_days < 90"
+    ],
+    "thresholds": {
+      "tenure_days_max": 90
+    },
+    "recommended_action": "Send onboarding journey — guide first meaningful purchase",
+    "urgency": "MEDIUM",
+    "window_days": 90
+  },
+  "Win-Back Target": {
+    "state_id": 2,
+    "meaning": "Member lapsed 60+ days ago but is showing early re-engagement signals — they opened an email, visited the app, or made a small purchase. The window for recovery is now.",
+    "key_signals": [
+      "recency_days > 60",
+      "email_open_30d > 0 OR app_open_30d > 0 OR push_open_30d > 0"
+    ],
+    "thresholds": {
+      "recency_days_min": 60
+    },
+    "recommended_action": "Send personalised win-back offer referencing last purchase category",
+    "urgency": "HIGH",
+    "window_days": 30
+  },
+  "Lapse Risk": {
+    "state_id": 3,
+    "meaning": "Member is still active but engagement is clearly declining — fewer transactions, growing gaps between visits. Without intervention within 30 days, they will fully lapse.",
+    "key_signals": [
+      "recency_days > 30",
+      "purchase_count_30d == 0",
+      "spend_slope_30d <= 0"
+    ],
+    "thresholds": {
+      "recency_days_min": 30,
+      "purchase_count_30d_max": 0,
+      "spend_slope_max": 0.0
+    },
+    "recommended_action": "Send urgency-framed win-back offer — highlight expiring points balance",
+    "urgency": "HIGH",
+    "window_days": 30
+  },
+  "Momentum Builder": {
+    "state_id": 4,
+    "meaning": "Member is on an upward trajectory — purchase frequency and spend are actively increasing. Most likely to move up a tier in the next 60 days.",
+    "key_signals": [
+      "spend_slope_30d > 5.0",
+      "purchase_count_30d >= 2",
+      "recency_days < 30",
+      "category_diversity_90d > 0.3"
+    ],
+    "thresholds": {
+      "spend_slope_min": 5.0,
+      "purchase_count_30d_min": 2,
+      "recency_days_max": 30,
+      "diversity_min": 0.3
+    },
+    "recommended_action": "Send tier upgrade nudge — show proximity to next tier",
+    "urgency": "LOW",
+    "window_days": 30
+  },
+  "Brand Advocate": {
+    "state_id": 5,
+    "meaning": "Member is deeply engaged across every channel — they open emails, use the app, hold a high loyalty tier, and shop across multiple categories.",
+    "key_signals": [
+      "email_open_30d >= 2 OR app_open_30d >= 3 OR social OR referral OR survey",
+      "tier_ordinal >= 2",
+      "category_diversity_90d > 0.4"
+    ],
+    "thresholds": {
+      "email_open_30d_min": 2,
+      "app_open_30d_min": 3,
+      "tier_ordinal_min": 2,
+      "diversity_min": 0.4
+    },
+    "recommended_action": "Send referral incentive — double points for friend referrals",
+    "urgency": "LOW",
+    "window_days": 30
+  },
+  "Redemption Hunter": {
+    "state_id": 6,
+    "meaning": "Member is primarily motivated by point redemption. They redeem a high fraction of earned points, often spiking activity around promotional events.",
+    "key_signals": [
+      "redemption_rate > 0.30",
+      "purchase_count_30d <= 1"
+    ],
+    "thresholds": {
+      "redemption_rate_min": 0.3,
+      "purchase_count_30d_max": 1
+    },
+    "recommended_action": "Send promo expiry alert — create urgency around point balance",
+    "urgency": "MEDIUM",
+    "window_days": 30
+  },
+  "Value Maximizer": {
+    "state_id": 7,
+    "meaning": "Member balances high redemption with broad engagement. They shop across categories to optimize earn rates and utilize rewards effectively.",
+    "key_signals": [
+      "category_diversity_90d > 0.50",
+      "redemption_rate > 0.10"
+    ],
+    "thresholds": {
+      "diversity_min": 0.5,
+      "redemption_rate_min": 0.1
+    },
+    "recommended_action": "Highlight partner network — show new categories to earn points",
+    "urgency": "LOW",
+    "window_days": 90
+  },
+  "Silent Accumulator": {
+    "state_id": 8,
+    "meaning": "Member is purchasing regularly but completely invisible in digital channels — no app opens, no email opens, no push notifications clicked. They earn points but never engage with loyalty communications.",
+    "key_signals": [
+      "purchase_count_30d >= 1",
+      "app_open_30d == 0",
+      "email_open_30d == 0",
+      "push_open_30d == 0"
+    ],
+    "thresholds": {
+      "purchase_count_30d_min": 1,
+      "app_open_30d_max": 0,
+      "email_open_30d_max": 0,
+      "push_open_30d_max": 0
+    },
+    "recommended_action": "Send app download incentive — bonus points for first in-app purchase",
+    "urgency": "MEDIUM",
+    "window_days": 30
+  },
+  "Plateau Cruiser": {
+    "state_id": 9,
+    "meaning": "Member is stable and habitual — consistent purchasing with no growth or decline signal. Comfortable where they are and unlikely to move up a tier without a nudge.",
+    "key_signals": [
+      "-2.0 <= spend_slope_30d <= 5.0",
+      "purchase_count_30d >= 1"
+    ],
+    "thresholds": {
+      "spend_slope_min": -2.0,
+      "spend_slope_max": 5.0,
+      "purchase_count_30d_min": 1
+    },
+    "recommended_action": "Send personalised offer based on most-purchased category",
+    "urgency": "LOW",
+    "window_days": 30
+  },
+  "Program Skeptic": {
+    "state_id": 10,
+    "meaning": "Member is enrolled but shows minimal engagement with the programme — low app use, ignores communications, and minimal profile completion. The loyalty programme is not influencing their behaviour.",
+    "key_signals": [
+      "catch-all — no other state rule fired"
+    ],
+    "thresholds": {},
+    "recommended_action": "Send reactivation email — focus on programme value proposition",
+    "urgency": "MEDIUM",
+    "window_days": 30
+  }
+}

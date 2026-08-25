@@ -1,0 +1,125 @@
+{
+  "fit_date": "2025-12-01",
+  "algorithm": "KMeans",
+  "k": 5,
+  "n_clusters": 5,
+  "n_behavioral_cols": 41,
+  "noise_pct": 0.0,
+  "overall_silhouette": 0.1196,
+  "overall_davies_bouldin": 1.7678,
+  "overall_calinski_harabasz": 77123.64,
+  "pca_components": 18,
+  "inertia": 10480487.19,
+  "segments": {
+    "0": {
+      "name": "Growth Builder",
+      "size_in_december": 180343,
+      "pct_of_december": 36.07,
+      "per_cluster_silhouette": 0.0958,
+      "dominant_features": [
+        "tier_changes_count",
+        "months_since_last_tier_change",
+        "recency_days"
+      ],
+      "profile": {
+        "spend_total_30d_mean": 247.07,
+        "purchase_count_30d_mean": 4.78,
+        "recency_days_mean": 3.48,
+        "app_open_30d_mean": 1.57,
+        "email_open_30d_mean": 1.3,
+        "redemption_rate_mean": 0.0527,
+        "spend_slope_30d_mean": 6.5668
+      },
+      "business_interpretation": "Members classified as 'Growth Builder' with avg spend $247.1/30d, 4.8 purchases/30d, recency 3 days.",
+      "recommended_action": "send_frequency_reward"
+    },
+    "1": {
+      "name": "High-Tier Accelerator",
+      "size_in_december": 79487,
+      "pct_of_december": 15.9,
+      "per_cluster_silhouette": 0.1591,
+      "dominant_features": [
+        "spend_total_90d",
+        "spend_total_180d",
+        "points_earned_lifetime"
+      ],
+      "profile": {
+        "spend_total_30d_mean": 689.27,
+        "purchase_count_30d_mean": 7.56,
+        "recency_days_mean": 2.52,
+        "app_open_30d_mean": 3.76,
+        "email_open_30d_mean": 2.1,
+        "redemption_rate_mean": 0.0358,
+        "spend_slope_30d_mean": 15.0446
+      },
+      "business_interpretation": "Members classified as 'High-Tier Accelerator' with avg spend $689.3/30d, 7.6 purchases/30d, recency 3 days.",
+      "recommended_action": "send_tier_upgrade_nudge"
+    },
+    "2": {
+      "name": "Program Skeptic",
+      "size_in_december": 86337,
+      "pct_of_december": 17.27,
+      "per_cluster_silhouette": 0.14,
+      "dominant_features": [
+        "tier_changes_count",
+        "tier_ordinal",
+        "months_since_last_tier_change"
+      ],
+      "profile": {
+        "spend_total_30d_mean": 187.31,
+        "purchase_count_30d_mean": 4.0,
+        "recency_days_mean": 5.34,
+        "app_open_30d_mean": 1.06,
+        "email_open_30d_mean": 0.92,
+        "redemption_rate_mean": 0.0536,
+        "spend_slope_30d_mean": 3.059
+      },
+      "business_interpretation": "Members classified as 'Program Skeptic' with avg spend $187.3/30d, 4.0 purchases/30d, recency 5 days.",
+      "recommended_action": "send_reactivation_email"
+    },
+    "3": {
+      "name": "Silent Accumulator",
+      "size_in_december": 153725,
+      "pct_of_december": 30.75,
+      "per_cluster_silhouette": 0.1217,
+      "dominant_features": [
+        "purchase_count_90d",
+        "unique_categories_90d",
+        "purchase_count_30d"
+      ],
+      "profile": {
+        "spend_total_30d_mean": 106.0,
+        "purchase_count_30d_mean": 2.28,
+        "recency_days_mean": 11.49,
+        "app_open_30d_mean": 0.85,
+        "email_open_30d_mean": 0.6,
+        "redemption_rate_mean": 0.0529,
+        "spend_slope_30d_mean": -2.7355
+      },
+      "business_interpretation": "Members classified as 'Silent Accumulator' with avg spend $106.0/30d, 2.3 purchases/30d, recency 11 days.",
+      "recommended_action": "send_app_engagement_push"
+    },
+    "4": {
+      "name": "Plateau Cruiser",
+      "size_in_december": 108,
+      "pct_of_december": 0.02,
+      "per_cluster_silhouette": 0.6944,
+      "dominant_features": [
+        "reward_browse_30d",
+        "app_open_30d",
+        "app_open_90d"
+      ],
+      "profile": {
+        "spend_total_30d_mean": 307.6,
+        "purchase_count_30d_mean": 4.55,
+        "recency_days_mean": 6.5,
+        "app_open_30d_mean": 377.18,
+        "email_open_30d_mean": 1.05,
+        "redemption_rate_mean": 0.0485,
+        "spend_slope_30d_mean": 0.4721
+      },
+      "business_interpretation": "Members classified as 'Plateau Cruiser' with avg spend $307.6/30d, 4.5 purchases/30d, recency 6 days.",
+      "recommended_action": "send_personalized_offer"
+    }
+  }
+}

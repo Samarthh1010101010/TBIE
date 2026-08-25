@@ -1,0 +1,25 @@
+PHASE 7 SUMMARY — LIFECYCLE STATE CLASSIFICATION
+============================================================
+Algorithm:        numpy.select() vectorized (no df.apply)
+States defined:   10
+Months processed: 12
+
+December 2025 State Distribution:
+  New & Uncertain          :  21,772  (  4.4%)  [MEDIUM]
+  Win-Back Target          :   1,032  (  0.2%)  [HIGH]
+  Lapse Risk               :   6,893  (  1.4%)  [HIGH]
+  Momentum Builder         : 200,082  ( 40.0%)  [LOW]
+  Brand Advocate           :  78,218  ( 15.6%)  [LOW]
+  Redemption Hunter        :     574  (  0.1%)  [MEDIUM]
+  Value Maximizer          :  30,486  (  6.1%)  [LOW]
+  Silent Accumulator       :  42,256  (  8.5%)  [MEDIUM]
+  Plateau Cruiser          :  41,400  (  8.3%)  [LOW]
+  Program Skeptic          :  77,287  ( 15.5%)  [MEDIUM]
+
+Files written:
+  states/lifecycle_states_*.parquet      x12
+  outputs/state_definitions.json
+  outputs/segment_state_cross_table.csv
+  outputs/state_transition_matrix.csv
+
+Total elapsed: 47.8s

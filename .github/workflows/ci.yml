@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: tests (python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.12 is the version the models were pickled under. 3.13 runs the
+        # rule/parser tests, which are pure pandas and must not regress.
+        python-version: ["3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        # The data-dependent tests skip cleanly when parquet artifacts are
+        # absent, which is the case on a fresh clone.
+        run: pytest tests/ -v --tb=short
+
+      - name: Verify shared modules are importable standalone
+        # Each of these was previously duplicated across the training and
+        # inference paths and the copies drifted. They are now single-sourced,
+        # so they must import without the pipeline's sys.path gymnastics.
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, "src")
+          from utils.state_rules import classify_states, STATE_IDS
+          from utils.velocity import add_velocity_features, VELOCITY_COLS
+          from utils.lag_features import add_delta_features, add_segment_history
+          from utils.economics import value_at_risk, evaluate_campaign
+          from utils.calibration import expected_calibration_error
+          from utils.pairs import to_model_matrix
+          assert len(STATE_IDS) == 10, STATE_IDS
+          assert len(VELOCITY_COLS) == 6, VELOCITY_COLS
+          print("all shared modules import cleanly")
+          PY
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install ruff
+        run: pip install ruff==0.14.2
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Format check
+        run: ruff format --check .
+        continue-on-error: true   # advisory until the phase scripts are reformatted
+
+  pipeline-contract:
+    name: model bundle contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify the shipped model bundle satisfies the inference contract
+        # Guards the failure mode where the training script and pipeline.py
+        # disagree on bundle key names and inference dies with a KeyError.
+        run: python scripts/check_model_contract.py

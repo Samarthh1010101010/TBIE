@@ -1,0 +1,44 @@
+{
+  "stage2": [
+    {
+      "config": "standard/4d/k=5",
+      "transform": "standard",
+      "n_components": 4,
+      "k": 5,
+      "silhouette": 0.2791,
+      "davies_bouldin": 0.9529,
+      "val_macro_f1": 0.7795665569199011,
+      "min_cluster_share": 0.00026
+    },
+    {
+      "config": "standard/8d/k=5",
+      "transform": "standard",
+      "n_components": 8,
+      "k": 5,
+      "silhouette": 0.181,
+      "davies_bouldin": 1.3303,
+      "val_macro_f1": 0.7741751982770114,
+      "min_cluster_share": 0.00026
+    },
+    {
+      "config": "log1p_skewed/4d/k=5",
+      "transform": "log1p_skewed",
+      "n_components": 4,
+      "k": 5,
+      "silhouette": 0.2257,
+      "davies_bouldin": 1.3324,
+      "val_macro_f1": 0.6096911286829915,
+      "min_cluster_share": 0.14208
+    },
+    {
+      "config": "standard/18d/k=5",
+      "transform": "standard",
+      "n_components": 18,
+      "k": 5,
+      "silhouette": 0.1171,
+      "davies_bouldin": 1.7396,
+      "val_macro_f1": 0.8020833579584338,
+      "min_cluster_share": 0.00026
+    }
+  ]
+}

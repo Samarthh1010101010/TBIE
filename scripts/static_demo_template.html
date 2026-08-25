@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TBIE — Temporal Behavioural Intelligence Engine</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--line:#2a2f3a;--text:#e6e9ef;
+        --muted:#8b93a7;--accent:#5b9dff;--good:#3fb950;--warn:#d29922;--bad:#f85149;
+        --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  header{padding:22px 28px;border-bottom:1px solid var(--line);display:flex;
+         align-items:baseline;gap:16px;flex-wrap:wrap}
+  header h1{margin:0;font-size:19px;letter-spacing:.2px}
+  .sub{color:var(--muted);font-size:13px}
+  .pill{margin-left:auto;font-family:var(--mono);font-size:12px;padding:4px 10px;
+        border-radius:999px;border:1px solid var(--line);background:var(--panel)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;
+       background:var(--good)}
+  main{padding:24px 28px;max-width:1180px;margin:0 auto}
+  .banner{background:#1d2433;border:1px solid #2d3a52;border-left:3px solid var(--accent);
+          border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13.5px;
+          color:#c8d3e6}
+  .grid{display:grid;gap:16px}
+  .c4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+  .c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .card h2{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.8px;
+           color:var(--muted);font-weight:600}
+  .stat{font-size:27px;font-weight:650;font-family:var(--mono)}
+  .stat.sm{font-size:19px}
+  .note{color:var(--muted);font-size:12px;margin-top:4px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  td.num,th.num{text-align:right;font-family:var(--mono)}
+  .bar{height:6px;border-radius:3px;background:var(--accent);opacity:.85}
+  .search{display:flex;gap:10px;flex-wrap:wrap}
+  input,select,button{background:var(--panel2);color:var(--text);border:1px solid var(--line);
+                      border-radius:7px;padding:9px 12px;font:inherit}
+  input{flex:1 1 240px;font-family:var(--mono)}
+  button{cursor:pointer;border-color:var(--accent);color:#cfe0ff}
+  button:hover{background:#232a38}
+  .kv{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;font-size:14px}
+  .kv dt{color:var(--muted)}
+  .kv dd{margin:0;font-family:var(--mono)}
+  .driver{padding:8px 0;border-bottom:1px solid var(--line)}
+  .driver:last-child{border-bottom:0}
+  .driver .f{font-family:var(--mono);font-size:13px}
+  .driver .m{color:var(--muted);font-size:12px}
+  .shapbar{height:5px;border-radius:3px;margin-top:5px}
+  .muted{color:var(--muted)}
+  .warn{color:var(--warn)}
+  .bad{color:var(--bad)}
+  a{color:var(--accent)}
+  footer{padding:20px 28px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);
+         margin-top:28px}
+  code{font-family:var(--mono);background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>TBIE</h1>
+  <span class="sub">Temporal Behavioural Intelligence Engine</span>
+  <span class="pill"><span class="dot"></span><span id="hdr"></span></span>
+</header>
+
+<main>
+  <div class="banner" id="banner"></div>
+
+  <section class="grid c4" id="stats"></section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Member lookup</h2>
+    <div class="search">
+      <input id="mid" placeholder="member_id — or pick a random one" autocomplete="off" list="ids">
+      <datalist id="ids"></datalist>
+      <button id="go">Explain</button>
+      <button id="rand">Random member</button>
+    </div>
+    <div id="out" style="margin-top:16px"></div>
+  </section>
+
+  <section class="grid c2" style="margin-top:16px">
+    <div class="card"><h2>Segments (all 500,000 members)</h2><table id="segT"></table></div>
+    <div class="card"><h2>Lifecycle states (all 500,000)</h2><table id="stateT"></table></div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Who may actually be contacted</h2>
+    <table id="eligT"></table>
+    <div class="note" style="margin-top:10px">
+      Consent, account status, fraud and contact frequency are enforced before any
+      recommendation. Before this layer existed, 222,259 members were being pointed at a
+      channel they had opted out of. Consent violations are now 0.
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Targeting cohort — ranked by value at risk</h2>
+    <div class="search" style="margin-bottom:12px">
+      <select id="fSeg"><option value="">any segment</option></select>
+      <select id="fState"><option value="">any state</option></select>
+      <label style="display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px">
+        <input type="checkbox" id="fElig" checked style="flex:0"> targetable only
+      </label>
+      <button id="build">Build list</button>
+    </div>
+    <div id="cohort" class="muted">Pick filters and build a list.</div>
+  </section>
+</main>
+
+<footer>
+  Static snapshot for demonstration — no server. Predictions, SHAP attributions and
+  eligibility are real model output at the observation date shown, over an embedded
+  stratified sample. The full pipeline scores all 500,000 members; run
+  <code>python -m uvicorn serving.api:app</code> for the live service.
+  Macro F1 should be read against the persistence baseline, not against zero.
+</footer>
+
+<script>
+const D = /*__TBIE_DATA__*/null;
+const $ = s => document.querySelector(s);
+const fmt = (n,d=0) => n.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct = n => (n*100).toFixed(1)+'%';
+const byId = {};
+D.members.forEach(m => byId[m.id] = m);
+
+$('#hdr').textContent = `${fmt(D.totalMembers)} members @ ${D.observationDate}`;
+$('#banner').innerHTML =
+  `<strong>Static demo.</strong> ${fmt(D.sampleSize)} members are embedded here, sampled across every
+   segment × state combination and biased toward high value at risk. Segment, state and
+   eligibility totals are for the full ${fmt(D.totalMembers)}-member population.
+   Everything shown is real model output — no mock data.`;
+
+const m = D.model;
+const lift = (m.macroF1Test - m.persistenceBaseline).toFixed(4);
+$('#stats').innerHTML = `
+  <div class="card"><h2>Macro F1 (test)</h2><div class="stat">${m.macroF1Test.toFixed(4)}</div>
+    <div class="note">+${lift} over persistence (${m.persistenceBaseline})</div></div>
+  <div class="card"><h2>Calibration (ECE)</h2><div class="stat">${m.ece}</div>
+    <div class="note">predicted 0.70 → observed 0.71</div></div>
+  <div class="card"><h2>Value at risk</h2><div class="stat sm">$${fmt(D.totalValueAtRisk)}</div>
+    <div class="note">expected loss, all ${fmt(D.totalMembers)} members</div></div>
+  <div class="card"><h2>Features</h2><div class="stat">${m.features}</div>
+    <div class="note">${m.usesLag ? 'incl. month-over-month deltas' : 'point-in-time only'}</div></div>`;
+
+function tbl(el, head, rows, max){
+  el.innerHTML = '<thead><tr>' + head.map(h =>
+      `<th class="${h.n?'num':''}">${h.t}</th>`).join('') + '<th></th></tr></thead><tbody>' +
+    rows.map(r => '<tr>' + r.cells.map(c =>
+      `<td class="${c.n?'num':''}">${c.v}</td>`).join('') +
+      `<td style="width:90px"><div class="bar" style="width:${Math.max(3,r.w/max*100)}%"></div></td></tr>`
+    ).join('') + '</tbody>';
+}
+
+const segMax = Math.max(...D.segments.map(s=>s.members));
+tbl($('#segT'), [{t:'Segment'},{t:'Members',n:1},{t:'Share',n:1},{t:'Avg 180d spend',n:1}],
+  D.segments.map(s => ({w:s.members, cells:[{v:s.name},{v:fmt(s.members),n:1},
+    {v:pct(s.members/D.totalMembers),n:1},{v:'$'+fmt(s.valueUsd),n:1}]})), segMax);
+
+const stMax = Math.max(...D.states.map(s=>s.members));
+tbl($('#stateT'), [{t:'State'},{t:'Members',n:1},{t:'Share',n:1}],
+  D.states.map(s => ({w:s.members, cells:[{v:s.name},{v:fmt(s.members),n:1},
+    {v:pct(s.members/D.totalMembers),n:1}]})), stMax);
+
+const elMax = Math.max(...D.eligibility.map(e=>e.members));
+const elLabel = {targetable:'Targetable', frequency_cap:'Frequency-capped (≥6 in 30d)',
+  no_channel_consent:'No consent on any channel', account_closed:'Account closed',
+  fraud_flagged:'Fraud-flagged'};
+tbl($('#eligT'), [{t:'Status'},{t:'Members',n:1},{t:'Share',n:1}],
+  D.eligibility.map(e => ({w:e.members, cells:[
+    {v:(e.reason==='targetable'?'<strong>':'')+(elLabel[e.reason]||e.reason)+(e.reason==='targetable'?'</strong>':'')},
+    {v:fmt(e.members),n:1},{v:pct(e.members/D.totalMembers),n:1}]})), elMax);
+
+$('#ids').innerHTML = D.members.map(m=>`<option value="${m.id}">`).join('');
+[...new Set(D.members.map(m=>m.seg))].sort().forEach(s =>
+  $('#fSeg').innerHTML += `<option>${s}</option>`);
+[...new Set(D.members.map(m=>m.state))].sort().forEach(s =>
+  $('#fState').innerHTML += `<option>${s}</option>`);
+
+function render(x){
+  if(!x){ $('#out').innerHTML = '<span class="bad">No member with that id in this sample. Try Random member.</span>'; return; }
+  const probs = Object.entries(x.probs).sort((a,b)=>b[1]-a[1]);
+  const maxAbs = Math.max(...x.drivers.map(d=>Math.abs(d.s)),1e-9);
+  const drivers = x.drivers.map(d => `
+    <div class="driver">
+      <div class="f">${d.f} = ${d.v}</div>
+      <div class="m">${d.s>0?'raises':'lowers'} this prediction by ${Math.abs(d.s).toFixed(3)} log-odds</div>
+      <div class="shapbar" style="width:${Math.abs(d.s)/maxAbs*100}%;background:${d.s>0?'var(--good)':'var(--bad)'}"></div>
+    </div>`).join('');
+  const contact = x.targetable
+    ? `<div>${x.action}</div>`
+    : `<div class="warn">${x.action}</div>`;
+  $('#out').innerHTML = `
+    <div class="grid c2">
+      <div class="card" style="background:var(--panel2)">
+        <h2>Profile</h2>
+        <dl class="kv">
+          <dt>Member</dt><dd>${x.id}</dd>
+          <dt>Segment</dt><dd>${x.seg} <span class="muted">(${x.segId})</span></dd>
+          <dt>Assignment conf.</dt><dd>${x.segConf.toFixed(3)}</dd>
+          <dt>State</dt><dd>${x.state}</dd>
+          <dt>Predicted (T+30d)</dt><dd>${x.pred}</dd>
+          <dt>Confidence</dt><dd>${x.conf.toFixed(3)}</dd>
+          <dt>P(value drop)</dt><dd>${x.adv.toFixed(3)}</dd>
+          <dt>Value at risk</dt><dd style="color:${x.var>200?'var(--warn)':'var(--text)'}">$${fmt(x.var)}</dd>
+        </dl>
+        <h2 style="margin-top:16px">Transition probabilities</h2>
+        <table><tbody>${probs.map(([k,v])=>`
+          <tr><td>${k}</td><td class="num">${v.toFixed(4)}</td>
+          <td style="width:100px"><div class="bar" style="width:${v*100}%"></div></td></tr>`).join('')}
+        </tbody></table>
+      </div>
+      <div class="card" style="background:var(--panel2)">
+        <h2>Why — SHAP drivers</h2>
+        ${drivers}
+        <h2 style="margin-top:16px">Contact decision</h2>
+        ${contact}
+        <div class="note" style="margin-top:8px">
+          Value at risk = Σ P(move to lower-value segment) × (value now − value then).
+          It is what a contact budget should be compared against, not the raw probability.
+        </div>
+      </div>
+    </div>`;
+}
+
+$('#go').onclick = () => render(byId[$('#mid').value.trim()]);
+$('#mid').addEventListener('keydown', e => { if(e.key==='Enter') $('#go').click(); });
+$('#rand').onclick = () => {
+  const x = D.members[Math.floor(Math.random()*D.members.length)];
+  $('#mid').value = x.id; render(x);
+};
+
+$('#build').onclick = () => {
+  let rows = D.members.slice();
+  if($('#fSeg').value)   rows = rows.filter(m=>m.seg===$('#fSeg').value);
+  if($('#fState').value) rows = rows.filter(m=>m.state===$('#fState').value);
+  if($('#fElig').checked) rows = rows.filter(m=>m.targetable);
+  rows.sort((a,b)=>b.var-a.var);
+  if(!rows.length){ $('#cohort').innerHTML = '<span class="muted">No members in this sample match.</span>'; return; }
+  const total = rows.reduce((s,m)=>s+m.var,0);
+  $('#cohort').innerHTML =
+    `<div class="note" style="margin-bottom:10px">${rows.length} matching members in this sample,
+      carrying <strong>$${fmt(total)}</strong> of expected value at risk. Ranked by value at risk —
+      not by likelihood of moving, because a 90% chance of losing $20 is a worse use of a
+      touchpoint than a 15% chance of losing $900.</div>
+     <table><thead><tr><th>Member</th><th>Segment</th><th>State</th><th>Predicted</th>
+     <th class="num">P(drop)</th><th class="num">Value at risk</th><th>Action</th></tr></thead><tbody>` +
+    rows.slice(0,25).map(m=>`<tr>
+      <td><a href="#" onclick="document.querySelector('#mid').value='${m.id}';document.querySelector('#go').click();window.scrollTo({top:0,behavior:'smooth'});return false">${m.id}</a></td>
+      <td>${m.seg}</td><td>${m.state}</td><td>${m.pred}</td>
+      <td class="num">${m.adv.toFixed(3)}</td><td class="num">$${fmt(m.var)}</td>
+      <td class="muted">${m.targetable ? m.channel : '—'}</td></tr>`).join('') +
+    '</tbody></table>';
+};
+
+$('#rand').click();
+</script>
+</body>
+</html>

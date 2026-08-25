@@ -1,0 +1,31 @@
+{
+  "reference_date": "2025-12-01",
+  "current_date": "2025-12-31",
+  "thresholds": {
+    "psi_warn": 0.1,
+    "psi_alert": 0.25,
+    "ch_drop_alert": 0.2,
+    "segment_shift_alert": 0.1
+  },
+  "feature_drift": {
+    "n_features": 40,
+    "n_alert": 4,
+    "n_warn": 4,
+    "max_psi_feature": "recency_days",
+    "max_psi": 5.61589
+  },
+  "cluster_quality": {
+    "calinski_harabasz_reference": 7948.06066862154,
+    "calinski_harabasz_current": 9234.489667730739,
+    "fractional_drop": -0.1618544513868575
+  },
+  "segment_mix_tvd": 0.05414,
+  "state_mix_tvd": 0.08104800000000002,
+  "alerts": [
+    "4 feature(s) exceed PSI 0.25"
+  ],
+  "warnings": [
+    "4 feature(s) exceed PSI 0.1"
+  ],
+  "verdict": "RETRAIN_RECOMMENDED"
+}

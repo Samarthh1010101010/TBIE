@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TBIE — Temporal Behavioural Intelligence Engine</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1e222b;
+    --line: #2a2f3a;
+    --text: #e6e9ef;
+    --muted: #8b93a7;
+    --accent: #5b9dff;
+    --good: #3fb950;
+    --warn: #d29922;
+    --bad: #f85149;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  header {
+    padding: 22px 28px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  }
+  header h1 { margin: 0; font-size: 19px; letter-spacing: .2px; }
+  header .sub { color: var(--muted); font-size: 13px; }
+  .pill {
+    margin-left: auto; font-family: var(--mono); font-size: 12px;
+    padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+  main { padding: 24px 28px; max-width: 1180px; margin: 0 auto; }
+  .grid { display: grid; gap: 16px; }
+  .cols-4 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .cols-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .card h2 { margin: 0 0 12px; font-size: 13px; text-transform: uppercase;
+             letter-spacing: .8px; color: var(--muted); font-weight: 600; }
+  .stat { font-size: 27px; font-weight: 650; font-family: var(--mono); }
+  .stat.small { font-size: 20px; }
+  .stat-note { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; font-size: 12px;
+       text-transform: uppercase; letter-spacing: .5px; }
+  td.num, th.num { text-align: right; font-family: var(--mono); }
+  .bar { height: 6px; border-radius: 3px; background: var(--accent); opacity:.85; }
+  .search { display: flex; gap: 10px; flex-wrap: wrap; }
+  input, select, button {
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--line); border-radius: 7px; padding: 9px 12px;
+    font: inherit;
+  }
+  input { flex: 1 1 240px; font-family: var(--mono); }
+  button { cursor: pointer; border-color: var(--accent); color: #cfe0ff; }
+  button:hover { background: #232a38; }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: 14px; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; font-family: var(--mono); }
+  .driver { padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .driver:last-child { border-bottom: 0; }
+  .driver .f { font-family: var(--mono); font-size: 13px; }
+  .driver .m { color: var(--muted); font-size: 12px; }
+  .shapbar { height: 5px; border-radius: 3px; margin-top: 5px; }
+  .muted { color: var(--muted); }
+  .err { color: var(--bad); font-size: 13px; }
+  footer { padding: 20px 28px; color: var(--muted); font-size: 12px;
+           border-top: 1px solid var(--line); margin-top: 28px; }
+  code { font-family: var(--mono); background: var(--panel-2);
+         padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>TBIE</h1>
+  <span class="sub">Temporal Behavioural Intelligence Engine</span>
+  <span class="pill" id="status"><span class="dot" style="background:var(--warn)"></span>connecting…</span>
+</header>
+
+<main>
+  <section class="grid cols-4" id="stats"></section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Member lookup</h2>
+    <div class="search">
+      <input id="mid" placeholder="member_id, e.g. MBR_0200452" autocomplete="off">
+      <button id="go">Explain</button>
+      <button id="rand">Random member</button>
+    </div>
+    <div id="memberOut" style="margin-top:16px"></div>
+  </section>
+
+  <section class="grid cols-2" style="margin-top:16px">
+    <div class="card">
+      <h2>Segments</h2>
+      <table id="segTable"><tbody></tbody></table>
+    </div>
+    <div class="card">
+      <h2>Lifecycle states</h2>
+      <table id="stateTable"><tbody></tbody></table>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Targeting cohort — ranked by value at risk</h2>
+    <div class="search" style="margin-bottom:12px">
+      <select id="fSeg"><option value="">any segment</option></select>
+      <select id="fState"><option value="">any state</option></select>
+      <button id="loadCohort">Build list</button>
+    </div>
+    <div id="cohortOut" class="muted">Pick filters and build a list.</div>
+  </section>
+</main>
+
+<footer>
+  Predictions are for the configured observation date and come from frozen
+  models — no refit at inference. Macro F1 should be read against the
+  persistence baseline, not against zero; see <code>MODEL_CARD.md</code>.
+</footer>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const fmt = (n, d = 0) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
+const pct = (n) => (n * 100).toFixed(1) + '%';
+
+async function api(path) {
+  const r = await fetch(path);
+  if (!r.ok) {
+    let detail;
+    try { detail = (await r.json()).detail; } catch { detail = r.statusText; }
+    throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+  }
+  return r.json();
+}
+
+async function boot() {
+  let health;
+  try {
+    health = await api('/health');
+  } catch (e) {
+    $('#status').innerHTML = '<span class="dot" style="background:var(--bad)"></span>API unreachable';
+    return;
+  }
+  const ok = health.status === 'ok';
+  $('#status').innerHTML =
+    `<span class="dot" style="background:${ok ? 'var(--good)' : 'var(--bad)'}"></span>` +
+    (ok ? `${fmt(health.members_loaded)} members @ ${health.observation_date}` : 'unavailable');
+  if (!ok) {
+    $('#stats').innerHTML = `<div class="card err">${health.error || 'Service not ready'}</div>`;
+    return;
+  }
+
+  const model = await api('/model');
+  const f1 = model.macro_f1_test;
+  $('#stats').innerHTML = `
+    <div class="card">
+      <h2>Members scored</h2>
+      <div class="stat">${fmt(health.members_loaded)}</div>
+      <div class="stat-note">observation date ${health.observation_date}</div>
+    </div>
+    <div class="card">
+      <h2>Macro F1 (test)</h2>
+      <div class="stat">${f1 ? f1.toFixed(4) : '—'}</div>
+      <div class="stat-note">vs 0.5651 persistence baseline</div>
+    </div>
+    <div class="card">
+      <h2>Features</h2>
+      <div class="stat">${model.n_features}</div>
+      <div class="stat-note">${model.uses_lag_features ? 'incl. month-over-month deltas' : 'point-in-time only'}</div>
+    </div>
+    <div class="card">
+      <h2>Decision rule</h2>
+      <div class="stat small">${model.decision_rule || 'argmax'}</div>
+      <div class="stat-note">selected on validation</div>
+    </div>`;
+
+  const segs = await api('/segments');
+  const maxSeg = Math.max(...segs.map(s => s.members));
+  $('#segTable').innerHTML =
+    '<thead><tr><th>Segment</th><th class="num">Members</th><th class="num">Share</th><th></th></tr></thead><tbody>' +
+    segs.map(s => `<tr>
+        <td>${s.segment_name}</td>
+        <td class="num">${fmt(s.members)}</td>
+        <td class="num">${pct(s.share)}</td>
+        <td style="width:90px"><div class="bar" style="width:${Math.max(3, s.members / maxSeg * 100)}%"></div></td>
+      </tr>`).join('') + '</tbody>';
+  $('#fSeg').innerHTML += segs.map(s => `<option>${s.segment_name}</option>`).join('');
+
+  const states = await api('/states');
+  const maxState = Math.max(...states.map(s => s.members));
+  $('#stateTable').innerHTML =
+    '<thead><tr><th>State</th><th class="num">Members</th><th class="num">Share</th><th></th></tr></thead><tbody>' +
+    states.map(s => `<tr>
+        <td>${s.state_name}</td>
+        <td class="num">${fmt(s.members)}</td>
+        <td class="num">${pct(s.share)}</td>
+        <td style="width:90px"><div class="bar" style="width:${Math.max(3, s.members / maxState * 100)}%"></div></td>
+      </tr>`).join('') + '</tbody>';
+  $('#fState').innerHTML += states.map(s => `<option>${s.state_name}</option>`).join('');
+}
+
+function renderMember(m) {
+  const probs = Object.entries(m.transition_probabilities).sort((a, b) => b[1] - a[1]);
+  const maxAbs = Math.max(...m.top_drivers.map(d => Math.abs(d.shap)), 1e-9);
+  const drivers = m.top_drivers.length
+    ? m.top_drivers.map(d => `
+        <div class="driver">
+          <div class="f">${d.feature} = ${(+d.value).toFixed(4)}</div>
+          <div class="m">${d.direction} this prediction by ${Math.abs(d.shap).toFixed(3)} log-odds</div>
+          <div class="shapbar" style="width:${Math.abs(d.shap) / maxAbs * 100}%;
+               background:${d.shap > 0 ? 'var(--good)' : 'var(--bad)'}"></div>
+        </div>`).join('')
+    : '<div class="muted">SHAP not available — install <code>shap</code> to enable per-member attribution.</div>';
+
+  $('#memberOut').innerHTML = `
+    <div class="grid cols-2">
+      <div class="card" style="background:var(--panel-2)">
+        <h2>Profile</h2>
+        <dl class="kv">
+          <dt>Member</dt><dd>${m.member_id}</dd>
+          <dt>Segment</dt><dd>${m.segment_name} <span class="muted">(${m.segment_id})</span></dd>
+          <dt>Assignment conf.</dt><dd>${m.segment_confidence.toFixed(3)}</dd>
+          <dt>State</dt><dd>${m.lifecycle_state}</dd>
+          <dt>Predicted (T+30d)</dt><dd>${m.predicted_segment_name}</dd>
+          <dt>Confidence</dt><dd>${m.prediction_confidence.toFixed(3)}</dd>
+          ${m.adverse_probability != null ? `
+          <dt>P(value drop)</dt><dd>${m.adverse_probability.toFixed(3)}</dd>` : ''}
+          ${m.value_at_risk_usd != null ? `
+          <dt>Value at risk</dt><dd style="color:${m.value_at_risk_usd > 200 ? 'var(--warn)' : 'var(--text)'}">
+            $${m.value_at_risk_usd.toLocaleString(undefined, {maximumFractionDigits: 0})}</dd>` : ''}
+        </dl>
+        ${m.value_at_risk_usd != null ? `
+        <div class="stat-note" style="margin-top:10px">
+          Value at risk is the expected spend lost to a move into a lower-value
+          segment — probability-weighted, not worst case. It is what a contact
+          budget should be compared against.
+        </div>` : ''}
+        <h2 style="margin-top:16px">Transition probabilities</h2>
+        <table><tbody>${probs.map(([k, v]) => `
+          <tr><td>${k.replace('prob_', '')}</td>
+              <td class="num">${v.toFixed(4)}</td>
+              <td style="width:100px"><div class="bar" style="width:${v * 100}%"></div></td></tr>`).join('')}
+        </tbody></table>
+      </div>
+      <div class="card" style="background:var(--panel-2)">
+        <h2>Why — SHAP drivers</h2>
+        ${drivers}
+        <h2 style="margin-top:16px">Recommended action</h2>
+        <div>${m.recommended_action || '<span class="muted">none</span>'}</div>
+      </div>
+    </div>`;
+}
+
+async function lookup(id) {
+  $('#memberOut').innerHTML = '<span class="muted">Loading…</span>';
+  try {
+    renderMember(await api('/members/' + encodeURIComponent(id)));
+  } catch (e) {
+    $('#memberOut').innerHTML = `<div class="err">${e.message}</div>`;
+  }
+}
+
+$('#go').onclick = () => { const v = $('#mid').value.trim(); if (v) lookup(v); };
+$('#mid').addEventListener('keydown', e => { if (e.key === 'Enter') $('#go').click(); });
+
+$('#rand').onclick = async () => {
+  try {
+    const c = await api('/cohort?limit=50');
+    if (!c.members.length) return;
+    const pick = c.members[Math.floor(Math.random() * c.members.length)];
+    $('#mid').value = pick.member_id;
+    lookup(pick.member_id);
+  } catch (e) {
+    $('#memberOut').innerHTML = `<div class="err">${e.message}</div>`;
+  }
+};
+
+$('#loadCohort').onclick = async () => {
+  const q = new URLSearchParams({limit: '25'});
+  if ($('#fSeg').value) q.set('segment_name', $('#fSeg').value);
+  if ($('#fState').value) q.set('state_name', $('#fState').value);
+  $('#cohortOut').innerHTML = '<span class="muted">Building…</span>';
+  try {
+    const c = await api('/cohort?' + q);
+    if (!c.matched) { $('#cohortOut').innerHTML = '<span class="muted">No members match.</span>'; return; }
+    const hasVar = c.cohort_value_at_risk_usd != null;
+    const header = hasVar
+      ? `${fmt(c.matched)} members match, carrying
+         <strong>$${fmt(c.cohort_value_at_risk_usd)}</strong> of expected value at risk.
+         Showing the top ${c.returned} ranked by value at risk — not by likelihood of
+         moving, because a 90% chance of losing $20 is a worse use of a touchpoint
+         than a 15% chance of losing $900.`
+      : `${fmt(c.matched)} members match — showing top ${c.returned} by likelihood of moving.`;
+
+    $('#cohortOut').innerHTML =
+      `<div class="stat-note" style="margin-bottom:10px">${header}</div>
+       <table><thead><tr><th>Member</th><th>Segment</th><th>State</th><th>Predicted</th>
+       <th class="num">P(drop)</th><th class="num">Value at risk</th><th>Action</th></tr></thead><tbody>` +
+      c.members.map(m => `<tr>
+          <td><a href="#" style="color:var(--accent)" onclick="document.querySelector('#mid').value='${m.member_id}';document.querySelector('#go').click();return false;">${m.member_id}</a></td>
+          <td>${m.segment_name}</td><td>${m.lifecycle_state}</td>
+          <td>${m.predicted_segment_name}</td>
+          <td class="num">${m.adverse_probability != null ? m.adverse_probability.toFixed(3) : '—'}</td>
+          <td class="num">${m.value_at_risk_usd != null ? '$' + fmt(m.value_at_risk_usd) : '—'}</td>
+          <td class="muted">${m.recommended_action || '—'}</td>
+        </tr>`).join('') + '</tbody></table>';
+  } catch (e) {
+    $('#cohortOut').innerHTML = `<div class="err">${e.message}</div>`;
+  }
+};
+
+boot();
+</script>
+</body>
+</html>

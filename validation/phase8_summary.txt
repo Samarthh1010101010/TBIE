@@ -1,0 +1,35 @@
+PHASE 8 SUMMARY — SEGMENT TRANSITION PREDICTION
+============================================================
+Model:          XGBoost (n_classes=5, best_iter=343)
+Features:       64  (40 raw + 6 velocity + 3 context)
+Train pairs:    4,000,000 (8 month pairs, FebOct)
+Val pairs:      500,000 (OctNov)
+Test pairs:     500,000 (NovDec)
+
+Selected on VALIDATION (test never consulted for any choice):
+  weighting:     balanced
+  decision rule: threshold-calibrated
+
+MACRO F1 (Val  — default):    0.8016
+MACRO F1 (Val  — calibrated): 0.8083
+MACRO F1 (Test — default):    0.8168
+MACRO F1 (Test — calibrated): 0.8073
+REPORTED (Test):              0.8073  95% CI [0.8035, 0.8100]
+
+Baselines (test):
+  majority-class:               0.0589
+  persistence (next = current): 0.5651
+  LIFT over persistence:        +0.2422
+
+Per-class F1 (Test):
+  Growth Builder           : F1=0.668   threshold=0.45
+  High-Tier Accelerator    : F1=0.896   threshold=0.56
+  Program Skeptic          : F1=0.801   threshold=0.38
+  Silent Accumulator       : F1=0.686   threshold=0.28
+  Plateau Cruiser          : F1=0.986   threshold=0.47
+
+Files written:
+  models/segment_transition_model.pkl
+  outputs/phase8_predictions_nov_dec.parquet
+  outputs/phase8_classification_report.txt
+Total elapsed: 1853.8s

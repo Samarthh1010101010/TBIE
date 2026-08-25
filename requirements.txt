@@ -1,0 +1,43 @@
+# TBIE — Pinned Requirements
+#
+# These are the versions the shipped models were trained and serialised with,
+# verified against the working interpreter rather than transcribed by hand.
+# (An earlier revision pinned pandas==3.0.3, which is not the version this
+# pipeline was built or tested on — installing it would have been the first
+# thing to break on a clean machine.)
+#
+# Python: 3.12 — models are pickled under 3.12. Do NOT run on 3.14+, the
+# pickle protocol and numpy/scikit-learn serialisation are incompatible.
+#
+# Install:  pip install -r requirements.txt
+
+# ── Core data processing ─────────────────────────────────────────────────────
+pandas==2.3.3
+numpy==1.26.4
+pyarrow==24.0.0            # engine='pyarrow' on every parquet read and write
+python-dateutil==2.9.0.post0
+tzdata==2026.2
+
+# ── Machine learning ─────────────────────────────────────────────────────────
+scikit-learn==1.9.0        # StandardScaler, PCA, compute_sample_weight
+xgboost==3.3.0             # segment transition model (multi:softprob)
+joblib==1.5.3              # model serialisation
+scipy==1.17.1              # cdist for nearest-centroid assignment
+
+# ── Tests ────────────────────────────────────────────────────────────────────
+pytest==8.4.2
+
+# ── Explanations ─────────────────────────────────────────────────────────────
+# No `shap` package required. xgboost implements TreeSHAP natively via
+# booster.predict(..., pred_contribs=True) — the same exact algorithm, one less
+# dependency. (shap 0.48 cannot load xgboost 3.x multiclass models anyway: it
+# expects a scalar base_score and 3.x emits a per-class vector.)
+
+# ── Serving (serving/api.py) ─────────────────────────────────────────────────
+# Not needed for the batch pipeline.
+fastapi==0.121.2
+uvicorn==0.41.0
+pydantic==2.12.3
+
+# ── Offline analysis only ────────────────────────────────────────────────────
+# hdbscan==0.8.44          # Phase 6 algorithm comparison only
