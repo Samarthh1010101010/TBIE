@@ -303,4 +303,5 @@ unreproducible from the checked-in training script.
 - Test macro F1 drops below the persistence baseline on a fresh month pair
 - Segment size distribution shifts by more than ~10 percentage points
 
-**Owner.** See `TEAM.md`.
+**Owner.** Kobie × PES University Hackathon 2025 team project — Samarth Hosalli
+and Siddarth Reddy, both AI & ML, PES University.

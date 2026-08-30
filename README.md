@@ -320,7 +320,6 @@ TBIE_CODE/
 ├── METHODOLOGY.md               -- features, clustering, transition model, state rules
 ├── MODEL_CARD.md                -- intended use, limitations, ethical considerations
 ├── data_quality_report.md
-├── TEAM.md
 ├── src/
 │   ├── 01_validate_raw.py …  08_transition_prediction.py   -- build + train
 │   ├── 09_calibration.py        -- probability reliability + isotonic fit
